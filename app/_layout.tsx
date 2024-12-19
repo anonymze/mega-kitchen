@@ -2,15 +2,19 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import AnimationSplashscreen from "@/components/animation-splashscreen";
 import "react-native-reanimated";
+import "@/styles/app.css";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+	const [showAnimation, setShowAnimation] = useState(true);
 	const [loaded] = useFonts({
-		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+		SpaceMono: require("@/assets/fonts/SpaceMono-Regular.ttf"),
 	});
 
 	useEffect(() => {
@@ -24,12 +28,22 @@ export default function RootLayout() {
 	}
 
 	return (
-		<>
-			<Stack>
-				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-				<Stack.Screen name="+not-found" />
-			</Stack>
+		<SafeAreaProvider>
+			<SafeAreaView className="flex-1">
+				{showAnimation ? (
+					<AnimationSplashscreen setShowAnimation={setShowAnimation} />
+				) : (
+					<Stack
+						screenOptions={{
+							contentStyle: { backgroundColor: "#ffffff" },
+							headerShown: false,
+						}}
+					>
+						<Stack.Screen name="index" />
+					</Stack>
+				)}
+			</SafeAreaView>
 			<StatusBar style="auto" />
-		</>
+		</SafeAreaProvider>
 	);
 }
