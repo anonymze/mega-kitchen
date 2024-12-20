@@ -17,7 +17,6 @@ export default function Card({ source }: Props) {
 					flex: 1,
 					width: "100%",
 					backgroundColor: "#ffffff",
-					borderRadius: 99,
 				}}
 				source={source}
 				placeholder={{ blurhash }}

@@ -1,9 +1,10 @@
 import { Heading } from "@/components/ui/heading";
 import { View } from "react-native";
-import fruitsAndVegetables from "@/utils/data/fruits_vegetables";
+import fruitsAndVegetables from "@/utils/data/fruits_vegetables_months";
 import { MONTHS } from "@/utils/data/months";
 import Card from "@/components/card";
 import { P } from "@/components/ui/p";
+import { Link } from "expo-router";
 
 // 221 vegetables
 // 162 fruits
@@ -20,21 +21,53 @@ export default function Page() {
 				Fruits & légumes de saison :
 			</Heading>
 
-			<P>Les fruits et légumes sont classés par ordre d'émission de CO2.</P>
+			<P>Les fruits et légumes sont classés par ordre d'émission de CO2 jusqu'à votre sac de course.</P>
 
-			<Heading level={3} className="pb-5">
+			<Heading level={3} className="py-5">
 				Fruits :
 			</Heading>
 
-			<View className="flex-row items-center gap-2">
-				{fruitsAndVegetables["january"].fruits.map((fruit) => {
-					return <Card key={fruit.id} iconName={fruit.image} alt="fruit" />;
+			<View className="flex-row flex-wrap items-center gap-2">
+				{fruitList.map((fruit) => {
+					return (
+						<Link
+							key={fruit.id}
+							href={{
+								pathname: "/modal",
+								params: {
+									type: "fruit",
+									id: fruit.id,
+								},
+							}}
+						>
+							<Card source={fruit.image} alt="fruit" />
+						</Link>
+					);
 				})}
 			</View>
 
-			<Heading level={3} className="pb-5">
+			<Heading level={3} className="py-5">
 				Légumes :
 			</Heading>
+
+			<View className="flex-row flex-wrap items-center gap-2">
+				{vegetableList.map((vegetable) => {
+					return (
+						<Link
+							key={vegetable.id}
+							href={{
+								pathname: "/modal",
+								params: {
+									type: "vegetable",
+									id: vegetable.id,
+								},
+							}}
+						>
+							<Card source={vegetable.image} alt="légume" />
+						</Link>
+					);
+				})}
+			</View>
 		</View>
 	);
 }

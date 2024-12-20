@@ -29,7 +29,7 @@ export default function RootLayout() {
 
 	return (
 		<SafeAreaProvider>
-			<SafeAreaView className="flex-1">
+			<SafeAreaView className="flex-1 p-4">
 				{showAnimation ? (
 					<AnimationSplashscreen setShowAnimation={setShowAnimation} />
 				) : (
@@ -40,6 +40,9 @@ export default function RootLayout() {
 						}}
 					>
 						<Stack.Screen name="index" />
+						<Stack.Screen name="modal" options={{
+							presentation: "modal"
+						}} />
 					</Stack>
 				)}
 			</SafeAreaView>
