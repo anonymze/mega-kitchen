@@ -20,7 +20,7 @@ export default function Card({ source }: Props) {
 				}}
 				source={source}
 				placeholder={{ blurhash }}
-				contentFit="cover"
+				contentFit="contain"
 				transition={500}
 			/>
 		</View>
