@@ -2,11 +2,11 @@ import { P } from "@/components/ui/p";
 import { useLocalSearchParams } from "expo-router/build/hooks";
 import { View } from "react-native";
 import { Image } from "expo-image";
+import { router } from "expo-router";
 import fruits from "@/utils/data/fruits";
 import vegetables from "@/utils/data/vegetables";
-import { router } from "expo-router";
 import fruits_vegetables_months from "@/utils/data/fruits_vegetables_months";
-import Animated, { ReduceMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { ReduceMotion, useSharedValue, withSpring } from "react-native-reanimated";
 import React from "react";
 
 type Product =
@@ -19,8 +19,10 @@ type Product =
 			type: "vegetable";
 	  };
 
+const MAX_KGS_CO2 = 10.6;
+
 export default function Modal() {
-	const width = useSharedValue(0);
+	const width = useSharedValue("0%");
 	const params = useLocalSearchParams<Product>();
 	if (!params.id || !params.type) return router.back();
 
@@ -34,11 +36,20 @@ export default function Modal() {
 		.map(([month]) => month);
 
 	React.useEffect(() => {
-		width.value = withSpring(100, {
-      duration: 1600,
-      dampingRatio: 0.6,
-      reduceMotion: ReduceMotion.System,
-		});
+    setTimeout(() => {
+			const percentage = (product.co2 / MAX_KGS_CO2) * 100;
+			// max duration 600ms
+			const duration = Math.min(600, Math.max(500, percentage * 20));
+			// max damping 0.8
+			const dampingRatio = Math.min(0.8, 0.4 + (percentage / 200));
+
+			width.set(withSpring(percentage + "%", {
+					duration,
+					dampingRatio,
+					reduceMotion: ReduceMotion.System,
+			}));
+	}, 220);
+
 	}, []);
 
 	return (
@@ -55,20 +66,20 @@ export default function Modal() {
 			/>
 			<P className="mb-6 text-xl font-semibold text-center">{product.label.FR}</P>
 
-			<View className="w-20 h-4 rounded-full bg-primary/50 border-2 border-primary" />
+			<View />
 
 			{/* months */}
 			<P className="text-lg font-semibold">{months.join(", ")}</P>
 
 			{/* product name */}
-			<Animated.View
-				style={{
-					width,
-					height: 100,
-					backgroundColor: "violet",
-				}}
-			/>
-
+			<View className="w-full">
+				<Animated.View
+					className="h-4 rounded-full bg-primary/50 border-2 border-primary"
+					style={{
+						width,
+					}}
+				/>
+			</View>
 			{/* co2 information */}
 			<View className="mt-4 flex-row items-center space-x-2">
 				<View className="h-3 w-3 rounded-full bg-primary" />

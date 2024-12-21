@@ -21,7 +21,7 @@ export default function Page() {
 				Fruits & légumes de saison :
 			</Heading>
 
-			<P>Les fruits et légumes sont classés par ordre d'émission de CO2 jusqu'à votre sac de course.</P>
+			<P>Les fruits et légumes sont classés par ordre d'émission de CO2 par production pour la saison en cours.</P>
 
 			<Heading level={3} className="py-5">
 				Fruits :
