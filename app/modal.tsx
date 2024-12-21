@@ -6,7 +6,7 @@ import { router } from "expo-router";
 import fruits from "@/utils/data/fruits";
 import vegetables from "@/utils/data/vegetables";
 import fruits_vegetables_months from "@/utils/data/fruits_vegetables_months";
-import Animated, { ReduceMotion, useSharedValue, withSpring } from "react-native-reanimated";
+import Animated, { clamp, ReduceMotion, useSharedValue, withSpring } from "react-native-reanimated";
 import React from "react";
 
 type Product =
@@ -38,10 +38,10 @@ export default function Modal() {
 	React.useEffect(() => {
     setTimeout(() => {
 			const percentage = (product.co2 / MAX_KGS_CO2) * 100;
-			// max duration 600ms
-			const duration = Math.min(600, Math.max(500, percentage * 20));
-			// max damping 0.8
-			const dampingRatio = Math.min(0.8, 0.4 + (percentage / 200));
+			// duration is between 500ms and 600ms
+			const duration = clamp(percentage * 20, 500, 600);
+			// max damping 0.7
+			const dampingRatio = Math.min(0.7, 0.4 + (percentage / 200));
 
 			width.set(withSpring(percentage + "%", {
 					duration,
