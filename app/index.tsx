@@ -1,5 +1,5 @@
 import { Heading } from "@/components/ui/heading";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import fruitsAndVegetables from "@/utils/data/fruits_vegetables_months";
 import { MONTHS } from "@/utils/data/months";
 import Card from "@/components/card";
@@ -16,7 +16,7 @@ export default function Page() {
 	const vegetableList = fruitsAndVegetables[currentMonthString].vegetables;
 
 	return (
-		<View className="flex-1">
+		<ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
 			<Heading level={2} className="pb-5">
 				Fruits & légumes de saison :
 			</Heading>
@@ -68,6 +68,6 @@ export default function Page() {
 					);
 				})}
 			</View>
-		</View>
+		</ScrollView>
 	);
 }

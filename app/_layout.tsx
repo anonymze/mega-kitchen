@@ -7,6 +7,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import AnimationSplashscreen from "@/components/animation-splashscreen";
 import "react-native-reanimated";
 import "@/styles/app.css";
+import { ScrollView } from "react-native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -40,9 +41,12 @@ export default function RootLayout() {
 						}}
 					>
 						<Stack.Screen name="index" />
-						<Stack.Screen name="modal" options={{
-							presentation: "modal"
-						}} />
+						<Stack.Screen
+							name="modal"
+							options={{
+								presentation: "modal",
+							}}
+						/>
 					</Stack>
 				)}
 			</SafeAreaView>
