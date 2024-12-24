@@ -6,7 +6,13 @@ import { router } from "expo-router";
 import fruits from "@/utils/data/fruits";
 import vegetables from "@/utils/data/vegetables";
 import fruits_vegetables_months from "@/utils/data/fruits_vegetables_months";
-import Animated, { clamp, ReduceMotion, useSharedValue, withSpring } from "react-native-reanimated";
+import Animated, {
+	clamp,
+	ReduceMotion,
+	useSharedValue,
+	withDelay,
+	withSpring,
+} from "react-native-reanimated";
 import React from "react";
 
 type Product =
@@ -36,23 +42,20 @@ export default function Modal() {
 		)
 		.map(([month]) => month);
 
-	React.useEffect(() => {
-    setTimeout(() => {
-			const percentage = (product.co2 / MAX_KGS_CO2) * 100;
-			// duration is between 500ms and 600ms
-			const duration = clamp(percentage * 20, 500, 600);
-			
-			// max damping 0.7
-			const dampingRatio = Math.min(0.7, 0.4 + (percentage / 200));
+	const percentage = (product.co2 / MAX_KGS_CO2) * 100;
+	// duration is between 500ms and 600ms
+	const duration = clamp(percentage * 20, 500, 600);
+	// max damping 0.7
+	const dampingRatio = Math.min(0.7, 0.4 + percentage / 200);
 
-			width.set(withSpring(`${percentage}%` as `${number}%`, {
-					duration,
-					dampingRatio,
-					reduceMotion: ReduceMotion.System,
-			}));
-	}, 220);
-
-	}, []);
+	width.value = withDelay(
+		240,
+		withSpring(`${percentage}%` as `${number}%`, {
+			duration,
+			dampingRatio,
+			reduceMotion: ReduceMotion.System,
+		})
+	);
 
 	return (
 		<View className="p-4">
@@ -82,7 +85,7 @@ export default function Modal() {
 					}}
 				/>
 			</View>
-			
+
 			{/* co2 information */}
 			<View className="mt-4 flex-row items-center space-x-2">
 				<View className="h-3 w-3 rounded-full bg-primary" />
