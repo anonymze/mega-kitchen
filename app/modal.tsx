@@ -19,10 +19,11 @@ type Product =
 			type: "vegetable";
 	  };
 
+// MANGUE
 const MAX_KGS_CO2 = 10.6;
 
 export default function Modal() {
-	const width = useSharedValue("0%");
+	const width = useSharedValue<`${number}%`>("0%");
 	const params = useLocalSearchParams<Product>();
 	if (!params.id || !params.type) return router.back();
 
@@ -40,10 +41,11 @@ export default function Modal() {
 			const percentage = (product.co2 / MAX_KGS_CO2) * 100;
 			// duration is between 500ms and 600ms
 			const duration = clamp(percentage * 20, 500, 600);
+			
 			// max damping 0.7
 			const dampingRatio = Math.min(0.7, 0.4 + (percentage / 200));
 
-			width.set(withSpring(percentage + "%", {
+			width.set(withSpring(`${percentage}%` as `${number}%`, {
 					duration,
 					dampingRatio,
 					reduceMotion: ReduceMotion.System,
@@ -80,6 +82,7 @@ export default function Modal() {
 					}}
 				/>
 			</View>
+			
 			{/* co2 information */}
 			<View className="mt-4 flex-row items-center space-x-2">
 				<View className="h-3 w-3 rounded-full bg-primary" />
