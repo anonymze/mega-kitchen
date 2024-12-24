@@ -15,7 +15,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
 	const [showAnimation, setShowAnimation] = useState(true);
 	const [loaded] = useFonts({
-		SpaceMono: require("@/assets/fonts/SpaceMono-Regular.ttf"),
+		AtkinsonRegular: require("@/assets/fonts/atkinson/Atkinson-Hyperlegible-Regular-102a.woff2"),
+		AtkinsonBold: require("@/assets/fonts/atkinson/Atkinson-Hyperlegible-Bold-102a.woff2"),
+		AtkinsonItalic: require("@/assets/fonts/atkinson/Atkinson-Hyperlegible-Italic-102a.woff2"),
 	});
 
 	useEffect(() => {

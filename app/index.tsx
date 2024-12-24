@@ -1,13 +1,11 @@
 import { Heading } from "@/components/ui/heading";
-import { ScrollView, View } from "react-native";
+import { Button, ScrollView, View } from "react-native";
 import fruitsAndVegetables from "@/utils/data/fruits_vegetables_months";
 import { MONTHS } from "@/utils/data/months";
-import Card from "@/components/card";
+import Card from "@/components/ui/card";
 import { P } from "@/components/ui/p";
-import { Link } from "expo-router";
-
-// 221 vegetables
-// 162 fruits
+import { Link, router } from "expo-router";
+import Dom from "@/components/ui/domcompo";
 
 export default function Page() {
 	const currentMonthString = MONTHS[new Date().getMonth()];
@@ -21,7 +19,9 @@ export default function Page() {
 				Fruits & légumes de saison :
 			</Heading>
 
-			<P>Les fruits et légumes sont classés par ordre d'émission de CO2 par production pour la saison en cours.</P>
+			<P>
+				Les fruits et légumes sont classés par ordre d'émission de CO2 par production pour la saison en cours.
+			</P>
 
 			<Heading level={3} className="py-5">
 				Fruits :
@@ -50,6 +50,15 @@ export default function Page() {
 				Légumes :
 			</Heading>
 
+			<Dom
+				dom={{
+					onNavigationStateChange: (navState) => {
+						console.log("navState");
+						console.log(navState);
+					},
+				}}
+			/>
+
 			<View className="flex-row flex-wrap items-center gap-2">
 				{vegetableList.map((vegetable) => {
 					return (
@@ -68,6 +77,13 @@ export default function Page() {
 					);
 				})}
 			</View>
+
+			<Button
+				title="Voir les fruits et légumes de l'année"
+				onPress={() => {
+					router.push("/frigo");
+				}}
+			/>
 		</ScrollView>
 	);
 }
