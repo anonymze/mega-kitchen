@@ -49,7 +49,7 @@ export default function Page() {
 				Légumes :
 			</Heading>
 
-			<View className="flex-row flex-wrap items-center gap-2">
+			<View className="flex-row flex-wrap items-center gap-2 mb-6">
 				{vegetableList.map((vegetable) => {
 					return (
 						<Link

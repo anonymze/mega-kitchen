@@ -7,13 +7,14 @@ import React from "react";
 interface Props {}
 
 const data = [
-	{ key: "1", value: "Mobiles", disabled: true },
-	{ key: "2", value: "Appliances" },
-	{ key: "3", value: "Cameras" },
-	{ key: "4", value: "Computers", disabled: true },
-	{ key: "5", value: "Vegetables" },
-	{ key: "6", value: "Diary Products" },
-	{ key: "7", value: "Drinks" },
+	{ label: "Item 1", value: "1" },
+	{ label: "Item 2", value: "2" },
+	{ label: "Item 3", value: "3" },
+	{ label: "Item 4", value: "4" },
+	{ label: "Item 5", value: "5" },
+	{ label: "Item 6", value: "6" },
+	{ label: "Item 7", value: "7" },
+	{ label: "Item 8", value: "8" },
 ];
 
 export default function Page() {
@@ -26,7 +27,7 @@ export default function Page() {
 			</Heading>
 
 			{isLoading && (
-				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<View className="flex-1 items-center justify-center">
 					<ActivityIndicator size="large" />
 				</View>
 			)}
