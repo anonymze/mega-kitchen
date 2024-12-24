@@ -1,4 +1,3 @@
-import Dom from "@/components/ui/domcompo";
 import { Heading } from "@/components/ui/heading";
 import { RefrigeratorIcon } from "lucide-react-native";
 import { Text, View } from "react-native";
@@ -16,22 +15,13 @@ const data = [
 	{ key: "7", value: "Drinks" },
 ];
 
-export default function Page(props: Props) {
+export default function Page() {
 	return (
 		<View>
 			<Heading level={1} className="mb-6">
 				<RefrigeratorIcon size={24} className="text-primary" /> Compose avec ton frigo
 			</Heading>
 
-			<Suspense fallback={<Text>Loading...</Text>}>
-				<Dom
-					dom={{
-						onNavigationStateChange: (navState) => {
-							console.log(navState);
-						},
-					}}
-				/>
-			</Suspense>
 		</View>
 	);
 }
