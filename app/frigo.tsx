@@ -1,7 +1,8 @@
 import { Heading } from "@/components/ui/heading";
+import { View, ActivityIndicator } from "react-native";
 import { RefrigeratorIcon } from "lucide-react-native";
-import { Text, View } from "react-native";
-import { Suspense } from "react";
+import Dom from "@/components/ui/domcompo";
+import React from "react";
 
 interface Props {}
 
@@ -16,12 +17,25 @@ const data = [
 ];
 
 export default function Page() {
+	const [isLoading, setIsLoading] = React.useState(true);
+
 	return (
-		<View>
+		<View style={{ flex: 1 }}>
 			<Heading level={1} className="mb-6">
-				<RefrigeratorIcon size={24} className="text-primary" /> Compose avec ton frigo
+				<RefrigeratorIcon color="red" size={48} /> Compose avec ton frigo
 			</Heading>
 
+			{isLoading && (
+				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+					<ActivityIndicator size="large" />
+				</View>
+			)}
+
+			<Dom
+				dom={{
+					onLoadEnd: () => setIsLoading(false),
+				}}
+			/>
 		</View>
 	);
 }

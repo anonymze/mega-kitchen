@@ -5,7 +5,6 @@ import { MONTHS } from "@/utils/data/months";
 import Card from "@/components/ui/card";
 import { P } from "@/components/ui/p";
 import { Link, router } from "expo-router";
-import Dom from "@/components/ui/domcompo";
 
 export default function Page() {
 	const currentMonthString = MONTHS[new Date().getMonth()];
@@ -14,7 +13,7 @@ export default function Page() {
 	const vegetableList = fruitsAndVegetables[currentMonthString].vegetables;
 
 	return (
-		<ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+		<>
 			<Heading level={2} className="pb-5">
 				Fruits & légumes de saison :
 			</Heading>
@@ -50,15 +49,6 @@ export default function Page() {
 				Légumes :
 			</Heading>
 
-			<Dom
-				dom={{
-					onNavigationStateChange: (navState) => {
-						console.log("navState");
-						console.log(navState);
-					},
-				}}
-			/>
-
 			<View className="flex-row flex-wrap items-center gap-2">
 				{vegetableList.map((vegetable) => {
 					return (
@@ -84,6 +74,6 @@ export default function Page() {
 					router.push("/frigo");
 				}}
 			/>
-		</ScrollView>
+		</>
 	);
 }
