@@ -1,39 +1,54 @@
-import React, { useCallback, useRef, useMemo } from "react";
+import React, { useCallback, useRef, useMemo, useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import BottomSheet, { BottomSheetScrollView, BottomSheetSectionList, BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { Heading } from "@/components/ui/heading";
 
 const snapPoints = ["70%", "90%"];
 
-const sections = Array(10)
-	.fill(0)
-	.map((_, index) => ({
-		title: `Section ${index}`,
-		data: Array(10)
-			.fill(0)
-			.map((_, index) => `Item ${index}`),
-	}));
+const initialSections = [
+	{
+		title: "Fruits",
+		data: ["Pomme", "Banane", "Orange", "Poire", "Fraise"]
+	},
+	{
+		title: "Légumes",
+		data: ["Carotte", "Tomate", "Poireau", "Courgette", "Salade"]
+	},
+	{
+		title: "Féculents",
+		data: ["Riz", "Pâtes", "Pomme de terre", "Quinoa", "Semoule"]
+	}
+];
 
 export default function Page() {
 	const sheetRef = useRef<BottomSheet>(null);
+	const [searchQuery, setSearchQuery] = useState('');
 
-	const renderItem = useCallback(
-    ({ item }) => (
-      <View style={styles.itemContainer}>
-        <Text>{item}</Text>
-      </View>
-    ),
-    []
-  );
+	// Filter sections based on search query
+	const filteredSections = useMemo(() => {
+		if (!searchQuery) return initialSections;
+		
+		return initialSections
+			.map(section => ({
+				title: section.title,
+				data: section.data.filter(item => 
+					item.toLowerCase().includes(searchQuery.toLowerCase())
+				)
+			}))
+			.filter(section => section.data.length > 0); // Remove empty sections
+	}, [searchQuery]);
 
-	const renderSectionHeader = useCallback(
-    ({ section }) => (
-      <View style={styles.sectionHeaderContainer}>
-        <Text>{section.title}</Text>
-      </View>
-    ),
-    []
-  );
+	const renderSectionHeader = useCallback(({ section }) => (
+		<View style={styles.sectionHeaderContainer}>
+			<Text style={styles.sectionHeaderText}>{section.title}</Text>
+		</View>
+	), []);
+
+	const renderItem = useCallback(({ item }) => (
+		<View style={styles.itemContainer}>
+			<Text>{item}</Text>
+		</View>
+	), []);
 
 	return (
 		<>
@@ -46,13 +61,18 @@ export default function Page() {
 				snapPoints={snapPoints}
 				index={-1}
 			>
-				<BottomSheetTextInput placeholder="Chercher un aliment" style={styles.input} />
+				<BottomSheetTextInput 
+					placeholder="Chercher un aliment" 
+					style={styles.input}
+					value={searchQuery}
+					onChangeText={setSearchQuery}
+				/>
 				<BottomSheetSectionList
-					sections={sections}
-					keyExtractor={(i) => i}
-					renderSectionHeader={renderSectionHeader}
+					sections={filteredSections}
 					renderItem={renderItem}
+					renderSectionHeader={renderSectionHeader}
 					contentContainerStyle={styles.contentContainer}
+					keyExtractor={(item, index) => item + index}
 				/>
 			</BottomSheet>
 		</>
@@ -84,7 +104,11 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgba(151, 151, 151, 0.25)",
 	},
 	sectionHeaderContainer: {
-    backgroundColor: "white",
-    padding: 6,
-  },
+		backgroundColor: "white",
+		padding: 6,
+	},
+	sectionHeaderText: {
+		fontSize: 16,
+		fontWeight: "bold",
+	},
 });
