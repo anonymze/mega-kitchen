@@ -1,64 +1,66 @@
 import React, { useCallback, useRef, useMemo } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import BottomSheet, { BottomSheetScrollView, BottomSheetTextInput } from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetScrollView, BottomSheetSectionList, BottomSheetTextInput } from "@gorhom/bottom-sheet";
+import { Heading } from "@/components/ui/heading";
 
-const App = () => {
-	// hooks
+const snapPoints = ["70%", "90%"];
+
+const sections = Array(10)
+	.fill(0)
+	.map((_, index) => ({
+		title: `Section ${index}`,
+		data: Array(10)
+			.fill(0)
+			.map((_, index) => `Item ${index}`),
+	}));
+
+export default function Page() {
 	const sheetRef = useRef<BottomSheet>(null);
 
-	// variables
-	const data = useMemo(
-		() =>
-			Array(50)
-				.fill(0)
-				.map((_, index) => `index-${index}`),
-		[]
-	);
-	const snapPoints = useMemo(() => ["25%", "50%", "50%"], []);
-
-	// callbacks
-	const handleSheetChange = useCallback((index) => {
-		console.log("handleSheetChange", index);
-	}, []);
-	const handleSnapPress = useCallback((index) => {
-		sheetRef.current?.snapToIndex(index);
-	}, []);
-	const handleClosePress = useCallback(() => {
-		sheetRef.current?.close();
-	}, []);
-
-	// render
 	const renderItem = useCallback(
-		(item) => (
-			<View key={item} style={styles.itemContainer}>
-				<Text>{item}</Text>
-			</View>
-		),
-		[]
-	);
+    ({ item }) => (
+      <View style={styles.itemContainer}>
+        <Text>{item}</Text>
+      </View>
+    ),
+    []
+  );
+
+	const renderSectionHeader = useCallback(
+    ({ section }) => (
+      <View style={styles.sectionHeaderContainer}>
+        <Text>{section.title}</Text>
+      </View>
+    ),
+    []
+  );
+
 	return (
-		<GestureHandlerRootView style={styles.container}>
-			<Button title="Snap To 90%" onPress={() => handleSnapPress(2)} />
-			<Button title="Snap To 50%" onPress={() => handleSnapPress(1)} />
-			<Button title="Snap To 25%" onPress={() => handleSnapPress(0)} />
-			<Button title="Close" onPress={() => handleClosePress()} />
+		<>
+			<Heading level={1}>Composer avec mon Frigo</Heading>
+			<Button title="Ouvrir le frigo" onPress={() => sheetRef.current?.snapToIndex(0)} />
 			<BottomSheet
 				ref={sheetRef}
-				index={1}
-				snapPoints={snapPoints}
+				enablePanDownToClose={true}
 				enableDynamicSizing={false}
-				onChange={handleSheetChange}
+				snapPoints={snapPoints}
+				index={-1}
 			>
-				<BottomSheetTextInput style={styles.input} />
-				<BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
-					{data.map(renderItem)}
-				</BottomSheetScrollView>
+				<BottomSheetTextInput placeholder="Chercher un aliment" style={styles.input} />
+				<BottomSheetSectionList
+					sections={sections}
+					keyExtractor={(i) => i}
+					renderSectionHeader={renderSectionHeader}
+					renderItem={renderItem}
+					contentContainerStyle={styles.contentContainer}
+				/>
 			</BottomSheet>
-		</GestureHandlerRootView>
+		</>
 	);
-};
+}
 
+// we use stylesheet because tailwind is not handled by some of these components
+// and instead of using a mix, we harmonize the styles
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -81,6 +83,8 @@ const styles = StyleSheet.create({
 		padding: 8,
 		backgroundColor: "rgba(151, 151, 151, 0.25)",
 	},
+	sectionHeaderContainer: {
+    backgroundColor: "white",
+    padding: 6,
+  },
 });
-
-export default App;
