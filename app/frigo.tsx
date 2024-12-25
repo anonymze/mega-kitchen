@@ -1,54 +1,82 @@
 import React, { useCallback, useRef, useMemo, useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
-import BottomSheet, { BottomSheetScrollView, BottomSheetSectionList, BottomSheetTextInput } from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetSectionList, BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { Heading } from "@/components/ui/heading";
+import fruits from "@/utils/data/fruits";
+import vegetables from "@/utils/data/vegetables";
+import { Image } from "expo-image";
 
-const snapPoints = ["70%", "90%"];
+const snapPoints = ["75%"];
+
+type FoodItem = (typeof fruits)[keyof typeof fruits];
 
 const initialSections = [
 	{
+		title: "Féculents",
+		data: Object.values(fruits),
+	},
+	{
 		title: "Fruits",
-		data: ["Pomme", "Banane", "Orange", "Poire", "Fraise"]
+		data: Object.values(fruits),
 	},
 	{
 		title: "Légumes",
-		data: ["Carotte", "Tomate", "Poireau", "Courgette", "Salade"]
+		data: Object.values(vegetables),
 	},
-	{
-		title: "Féculents",
-		data: ["Riz", "Pâtes", "Pomme de terre", "Quinoa", "Semoule"]
-	}
 ];
 
 export default function Page() {
 	const sheetRef = useRef<BottomSheet>(null);
-	const [searchQuery, setSearchQuery] = useState('');
+	const [searchQuery, setSearchQuery] = useState("");
 
 	// Filter sections based on search query
 	const filteredSections = useMemo(() => {
 		if (!searchQuery) return initialSections;
-		
+
 		return initialSections
-			.map(section => ({
+			.map((section) => ({
 				title: section.title,
-				data: section.data.filter(item => 
-					item.toLowerCase().includes(searchQuery.toLowerCase())
-				)
+				data: section.data.filter((item) =>
+					item.label.FR.toLowerCase()
+						.normalize("NFD")
+						.replace(/[\u0300-\u036f]/g, "")
+						.includes(
+							searchQuery
+								.toLowerCase()
+								.normalize("NFD")
+								.replace(/[\u0300-\u036f]/g, "")
+						)
+				),
 			}))
-			.filter(section => section.data.length > 0); // Remove empty sections
+			.filter((section) => section.data.length > 0); // Remove empty sections
 	}, [searchQuery]);
 
-	const renderSectionHeader = useCallback(({ section }) => (
-		<View style={styles.sectionHeaderContainer}>
-			<Text style={styles.sectionHeaderText}>{section.title}</Text>
-		</View>
-	), []);
+	const renderSectionHeader = useCallback(
+		({ section }: { section: (typeof initialSections)[number] }) => (
+			<View className="p-2 mb-1 bg-primary rounded-lg">
+				<Text className="text-light text-lg font-bold">{section.title}</Text>
+			</View>
+		),
+		[]
+	);
 
-	const renderItem = useCallback(({ item }) => (
-		<View style={styles.itemContainer}>
-			<Text>{item}</Text>
-		</View>
-	), []);
+	const renderItem = useCallback(
+		({ item }: { item: FoodItem }) => (
+			<View className="flex-row gap-3 items-center p-2 my-1">
+				<Image
+					style={{
+						width: 30,
+						height: 30,
+					}}
+					contentFit="contain"
+					source={item.image}
+					alt={item.label.FR}
+				/>
+				<Text className="text-xl">{item.label.FR}</Text>
+			</View>
+		),
+		[]
+	);
 
 	return (
 		<>
@@ -61,9 +89,16 @@ export default function Page() {
 				snapPoints={snapPoints}
 				index={-1}
 			>
-				<BottomSheetTextInput 
-					placeholder="Chercher un aliment" 
-					style={styles.input}
+				<BottomSheetTextInput
+					placeholder="Chercher un aliment"
+					style={{
+						marginTop: 8,
+						marginBottom: 10,
+						borderRadius: 10,
+						fontSize: 16,
+						padding: 12,
+						backgroundColor: "rgba(151, 151, 151, 0.25)",
+					}}
 					value={searchQuery}
 					onChangeText={setSearchQuery}
 				/>
@@ -71,44 +106,14 @@ export default function Page() {
 					sections={filteredSections}
 					renderItem={renderItem}
 					renderSectionHeader={renderSectionHeader}
-					contentContainerStyle={styles.contentContainer}
-					keyExtractor={(item, index) => item + index}
+					contentContainerStyle={{
+						backgroundColor: "white",
+						// spaceing scrollbar
+						paddingRight: 8,
+					}}
+					keyExtractor={(item, _) => item.label.FR}
 				/>
 			</BottomSheet>
 		</>
 	);
 }
-
-// we use stylesheet because tailwind is not handled by some of these components
-// and instead of using a mix, we harmonize the styles
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		paddingTop: 200,
-	},
-	contentContainer: {
-		backgroundColor: "white",
-	},
-	itemContainer: {
-		padding: 6,
-		margin: 6,
-		backgroundColor: "#eee",
-	},
-	input: {
-		marginTop: 8,
-		marginBottom: 10,
-		borderRadius: 10,
-		fontSize: 16,
-		lineHeight: 20,
-		padding: 8,
-		backgroundColor: "rgba(151, 151, 151, 0.25)",
-	},
-	sectionHeaderContainer: {
-		backgroundColor: "white",
-		padding: 6,
-	},
-	sectionHeaderText: {
-		fontSize: 16,
-		fontWeight: "bold",
-	},
-});
