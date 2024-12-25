@@ -11,7 +11,7 @@ const blurhash =
 
 export default function Card({ source }: Props) {
 	return (
-		<View className="w-12 h-12 p-2 border-primary border-2 rounded-full">
+		<View className="w-20 h-20 p-2 border-primary border-2 rounded-full">
 			<Image
 				style={{
 					flex: 1,

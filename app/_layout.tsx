@@ -1,3 +1,5 @@
+import "@/styles/app.css";
+import "react-native-reanimated";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -5,9 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import AnimationSplashscreen from "@/components/animation-splashscreen";
-import "react-native-reanimated";
-import "@/styles/app.css";
-import { ScrollView } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -31,29 +31,31 @@ export default function RootLayout() {
 	}
 
 	return (
-		<SafeAreaProvider>
-			<SafeAreaView className="flex-1 p-4">
-				{showAnimation ? (
-					<AnimationSplashscreen setShowAnimation={setShowAnimation} />
-				) : (
-					<Stack
-						screenOptions={{
-							contentStyle: { backgroundColor: "#ffffff" },
-							headerShown: false,
-						}}
-					>
-						<Stack.Screen name="frigo" />
-						<Stack.Screen name="index" />
-						<Stack.Screen
-							name="modal"
-							options={{
-								presentation: "modal",
-							}}
-						/>
-					</Stack>
-				)}
-			</SafeAreaView>
-			<StatusBar style="auto" />
-		</SafeAreaProvider>
+		<GestureHandlerRootView>
+			<SafeAreaProvider>
+				<SafeAreaView className="flex-1 p-4">
+						{showAnimation ? (
+							<AnimationSplashscreen setShowAnimation={setShowAnimation} />
+						) : (
+							<Stack
+								screenOptions={{
+									contentStyle: { backgroundColor: "#ffffff" },
+									headerShown: false,
+								}}
+							>
+								<Stack.Screen name="frigo" />
+								<Stack.Screen name="index" />
+								<Stack.Screen
+									name="modal"
+									options={{
+										presentation: "modal",
+									}}
+								/>
+							</Stack>
+						)}
+				</SafeAreaView>
+				<StatusBar style="auto" />
+			</SafeAreaProvider>
+		</GestureHandlerRootView>
 	);
 }
