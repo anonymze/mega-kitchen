@@ -70,7 +70,7 @@ export default function Page() {
 			</View>
 
 			<Button
-				title="Voir les fruits et légumes de l'année"
+				title="FRIGO - Voir les fruits et légumes de l'année"
 				onPress={() => {
 					router.push("/frigo");
 				}}

@@ -1,42 +1,32 @@
-import { Heading } from "@/components/ui/heading";
-import { View, ActivityIndicator } from "react-native";
-import { RefrigeratorIcon } from "lucide-react-native";
-import Dom from "@/components/ui/domcompo";
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModal, BottomSheetView, BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
-interface Props {}
+const App = () => {
+	// ref
+	const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-const data = [
-	{ label: "Item 1", value: "1" },
-	{ label: "Item 2", value: "2" },
-	{ label: "Item 3", value: "3" },
-	{ label: "Item 4", value: "4" },
-	{ label: "Item 5", value: "5" },
-	{ label: "Item 6", value: "6" },
-	{ label: "Item 7", value: "7" },
-	{ label: "Item 8", value: "8" },
-];
+	// callbacks
+	const handlePresentModalPress = useCallback(() => {
+		bottomSheetModalRef.current?.present();
+	}, []);
+	const handleSheetChanges = useCallback((index: number) => {
+		console.log("handleSheetChanges", index);
+	}, []);
 
-export default function Page() {
-	const [isLoading, setIsLoading] = React.useState(true);
-
+	// renders
 	return (
-		<View style={{ flex: 1 }}>
-			<Heading level={1} className="mb-6">
-				<RefrigeratorIcon color="red" size={48} /> Compose avec ton frigo
-			</Heading>
-
-			{isLoading && (
-				<View className="flex-1 items-center justify-center">
-					<ActivityIndicator size="large" />
-				</View>
-			)}
-
-			<Dom
-				dom={{
-					onLoadEnd: () => setIsLoading(false),
-				}}
-			/>
-		</View>
+		<BottomSheetModalProvider>
+			<Button onPress={handlePresentModalPress} title="Present Modal" color="black" />
+			<BottomSheetModal ref={bottomSheetModalRef} onChange={handleSheetChanges}>
+				<BottomSheetView>
+					<Text>Awesome 🎉</Text>
+				</BottomSheetView>
+			</BottomSheetModal>
+		</BottomSheetModalProvider>
 	);
-}
+};
+
+
+export default App;
