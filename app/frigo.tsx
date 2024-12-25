@@ -5,16 +5,16 @@ import { Heading } from "@/components/ui/heading";
 import fruits from "@/utils/data/fruits";
 import vegetables from "@/utils/data/vegetables";
 import { Image } from "expo-image";
+import { Pressable, TouchableOpacity } from "react-native-gesture-handler";
+
+// WE ARE DEALING WITH A CONSEQUENT LIST, SO WE USE STYLE SHEET CSS INSTEAD
+// OF TAILWIND FOR PERFORMANCE REASONS
 
 const snapPoints = ["75%"];
 
 type FoodItem = (typeof fruits)[keyof typeof fruits];
 
 const initialSections = [
-	{
-		title: "Féculents",
-		data: Object.values(fruits),
-	},
 	{
 		title: "Fruits",
 		data: Object.values(fruits),
@@ -28,6 +28,7 @@ const initialSections = [
 export default function Page() {
 	const sheetRef = useRef<BottomSheet>(null);
 	const [searchQuery, setSearchQuery] = useState("");
+	const [selectedId, setSelectedId] = useState<Array<string> | null>(null);
 
 	// Filter sections based on search query
 	const filteredSections = useMemo(() => {
@@ -53,8 +54,10 @@ export default function Page() {
 
 	const renderSectionHeader = useCallback(
 		({ section }: { section: (typeof initialSections)[number] }) => (
-			<View className="p-2 mb-1 bg-primary rounded-lg">
-				<Text className="text-light text-lg font-bold">{section.title}</Text>
+			<View style={styles.sectionHeaderContainer}>
+				<View style={styles.sectionHeader}>
+					<Text style={styles.sectionHeaderText}>{section.title}</Text>
+				</View>
 			</View>
 		),
 		[]
@@ -62,20 +65,21 @@ export default function Page() {
 
 	const renderItem = useCallback(
 		({ item }: { item: FoodItem }) => (
-			<View className="flex-row gap-3 items-center p-2 my-1">
-				<Image
-					style={{
-						width: 30,
-						height: 30,
-					}}
-					contentFit="contain"
-					source={item.image}
-					alt={item.label.FR}
-				/>
-				<Text className="text-xl">{item.label.FR}</Text>
-			</View>
+			<Pressable
+				style={[styles.itemContainer, selectedId?.includes(item.label.FR) && styles.selectedItem]}
+				onPress={() => {
+					if (selectedId?.includes(item.label.FR)) {
+						setSelectedId(selectedId.filter((id) => id !== item.label.FR));
+					} else {
+						setSelectedId([...(selectedId || []), item.label.FR]);
+					}
+				}}
+			>
+				<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
+				<Text style={styles.itemText}>{item.label.FR}</Text>
+			</Pressable>
 		),
-		[]
+		[selectedId]
 	);
 
 	return (
@@ -91,14 +95,7 @@ export default function Page() {
 			>
 				<BottomSheetTextInput
 					placeholder="Chercher un aliment"
-					style={{
-						marginTop: 8,
-						marginBottom: 10,
-						borderRadius: 10,
-						fontSize: 16,
-						padding: 12,
-						backgroundColor: "rgba(151, 151, 151, 0.25)",
-					}}
+					style={styles.searchInput}
 					value={searchQuery}
 					onChangeText={setSearchQuery}
 				/>
@@ -106,14 +103,59 @@ export default function Page() {
 					sections={filteredSections}
 					renderItem={renderItem}
 					renderSectionHeader={renderSectionHeader}
-					contentContainerStyle={{
-						backgroundColor: "white",
-						// spaceing scrollbar
-						paddingRight: 8,
-					}}
+					contentContainerStyle={styles.bottomSheetContent}
 					keyExtractor={(item, _) => item.label.FR}
 				/>
+				<Button title="Ajouter" onPress={() => sheetRef.current?.close()} />
 			</BottomSheet>
 		</>
 	);
 }
+
+const styles = StyleSheet.create({
+	sectionHeaderContainer: {
+		flexDirection: "row",
+	},
+	sectionHeader: {
+		backgroundColor: "#007AFF", // Replace with your primary color
+		borderRadius: 8,
+		paddingHorizontal: 12,
+		paddingVertical: 4,
+		marginBottom: 6,
+	},
+	sectionHeaderText: {
+		color: "#FFFFFF",
+		fontSize: 18,
+		fontWeight: "bold",
+	},
+	itemContainer: {
+		flexDirection: "row",
+		gap: 12,
+		alignItems: "center",
+		padding: 8,
+		marginVertical: 2,
+		borderRadius: 8,
+	},
+	itemImage: {
+		width: 30,
+		height: 30,
+	},
+	selectedItem: {
+		backgroundColor: "#007AFF",
+		color: "#FFFFFF",
+	},
+	itemText: {
+		fontSize: 20,
+	},
+	searchInput: {
+		marginBottom: 10,
+		padding: 12,
+		borderRadius: 10,
+		fontSize: 16,
+		backgroundColor: "rgba(151, 151, 151, 0.25)",
+	},
+	bottomSheetContent: {
+		backgroundColor: "white",
+		paddingRight: 10,
+	},
+});
