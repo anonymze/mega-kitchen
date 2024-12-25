@@ -5,7 +5,8 @@ import { Heading } from "@/components/ui/heading";
 import fruits from "@/utils/data/fruits";
 import vegetables from "@/utils/data/vegetables";
 import { Image } from "expo-image";
-import { Pressable, TouchableOpacity } from "react-native-gesture-handler";
+import { Pressable, PressableProps } from "react-native-gesture-handler";
+import { cn } from "@/utils/libs/tailwind";
 
 // WE ARE DEALING WITH A CONSEQUENT LIST, SO WE USE STYLE SHEET CSS INSTEAD
 // OF TAILWIND FOR PERFORMANCE REASONS
@@ -49,13 +50,13 @@ export default function Page() {
 						)
 				),
 			}))
-			.filter((section) => section.data.length > 0); // Remove empty sections
+			.filter((section) => section.data.length > 0); // remove empty sections
 	}, [searchQuery]);
 
 	const renderSectionHeader = useCallback(
 		({ section }: { section: (typeof initialSections)[number] }) => (
 			<View style={styles.sectionHeaderContainer}>
-				<View style={styles.sectionHeader}>
+				<View style={styles.sectionHeader} className="bg-primary">
 					<Text style={styles.sectionHeaderText}>{section.title}</Text>
 				</View>
 			</View>
@@ -65,8 +66,8 @@ export default function Page() {
 
 	const renderItem = useCallback(
 		({ item }: { item: FoodItem }) => (
-			<Pressable
-				style={[styles.itemContainer, selectedId?.includes(item.label.FR) && styles.selectedItem]}
+			<PressableButton
+				style={[styles.itemContainer]}
 				onPress={() => {
 					if (selectedId?.includes(item.label.FR)) {
 						setSelectedId(selectedId.filter((id) => id !== item.label.FR));
@@ -76,8 +77,10 @@ export default function Page() {
 				}}
 			>
 				<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
-				<Text style={styles.itemText}>{item.label.FR}</Text>
-			</Pressable>
+				<Text style={[styles.itemText, selectedId?.includes(item.label.FR) && styles.selectedItemText]}>
+					{item.label.FR}
+				</Text>
+			</PressableButton>
 		),
 		[selectedId]
 	);
@@ -106,7 +109,17 @@ export default function Page() {
 					contentContainerStyle={styles.bottomSheetContent}
 					keyExtractor={(item, _) => item.label.FR}
 				/>
-				<Button title="Ajouter" onPress={() => sheetRef.current?.close()} />
+
+				<View className="flex-row justify-around">
+					<Button
+						title="Effacer"
+						onPress={() => {
+							setSelectedId(null);
+							setSearchQuery("");
+						}}
+					/>
+					<Button title="Ajouter" onPress={() => sheetRef.current?.close()} />
+				</View>
 			</BottomSheet>
 		</>
 	);
@@ -117,7 +130,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	sectionHeader: {
-		backgroundColor: "#007AFF", // Replace with your primary color
 		borderRadius: 8,
 		paddingHorizontal: 12,
 		paddingVertical: 4,
@@ -140,9 +152,8 @@ const styles = StyleSheet.create({
 		width: 30,
 		height: 30,
 	},
-	selectedItem: {
-		backgroundColor: "#007AFF",
-		color: "#FFFFFF",
+	selectedItemText: {
+		color: "#ffffff",
 	},
 	itemText: {
 		fontSize: 20,
@@ -159,3 +170,18 @@ const styles = StyleSheet.create({
 		paddingRight: 10,
 	},
 });
+
+const PressableButton = ({
+	children,
+	...props
+}: {
+	children: React.ReactNode;
+	className?: string;
+	props?: PressableProps;
+}) => {
+	return (
+		<Pressable className={({ pressed }) => cn("p-4 rounded-lg", pressed ? "bg-primary/80" : "")} {...props}>
+			{children}
+		</Pressable>
+	);
+};
