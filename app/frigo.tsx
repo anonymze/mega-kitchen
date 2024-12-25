@@ -1,32 +1,86 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React, { useCallback, useRef, useMemo } from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { BottomSheetModal, BottomSheetView, BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetScrollView, BottomSheetTextInput } from "@gorhom/bottom-sheet";
 
 const App = () => {
-	// ref
-	const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+	// hooks
+	const sheetRef = useRef<BottomSheet>(null);
+
+	// variables
+	const data = useMemo(
+		() =>
+			Array(50)
+				.fill(0)
+				.map((_, index) => `index-${index}`),
+		[]
+	);
+	const snapPoints = useMemo(() => ["25%", "50%", "50%"], []);
 
 	// callbacks
-	const handlePresentModalPress = useCallback(() => {
-		bottomSheetModalRef.current?.present();
+	const handleSheetChange = useCallback((index) => {
+		console.log("handleSheetChange", index);
 	}, []);
-	const handleSheetChanges = useCallback((index: number) => {
-		console.log("handleSheetChanges", index);
+	const handleSnapPress = useCallback((index) => {
+		sheetRef.current?.snapToIndex(index);
+	}, []);
+	const handleClosePress = useCallback(() => {
+		sheetRef.current?.close();
 	}, []);
 
-	// renders
+	// render
+	const renderItem = useCallback(
+		(item) => (
+			<View key={item} style={styles.itemContainer}>
+				<Text>{item}</Text>
+			</View>
+		),
+		[]
+	);
 	return (
-		<BottomSheetModalProvider>
-			<Button onPress={handlePresentModalPress} title="Present Modal" color="black" />
-			<BottomSheetModal ref={bottomSheetModalRef} onChange={handleSheetChanges}>
-				<BottomSheetView>
-					<Text>Awesome 🎉</Text>
-				</BottomSheetView>
-			</BottomSheetModal>
-		</BottomSheetModalProvider>
+		<GestureHandlerRootView style={styles.container}>
+			<Button title="Snap To 90%" onPress={() => handleSnapPress(2)} />
+			<Button title="Snap To 50%" onPress={() => handleSnapPress(1)} />
+			<Button title="Snap To 25%" onPress={() => handleSnapPress(0)} />
+			<Button title="Close" onPress={() => handleClosePress()} />
+			<BottomSheet
+				ref={sheetRef}
+				index={1}
+				snapPoints={snapPoints}
+				enableDynamicSizing={false}
+				onChange={handleSheetChange}
+			>
+				<BottomSheetTextInput style={styles.input} />
+				<BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
+					{data.map(renderItem)}
+				</BottomSheetScrollView>
+			</BottomSheet>
+		</GestureHandlerRootView>
 	);
 };
 
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		paddingTop: 200,
+	},
+	contentContainer: {
+		backgroundColor: "white",
+	},
+	itemContainer: {
+		padding: 6,
+		margin: 6,
+		backgroundColor: "#eee",
+	},
+	input: {
+		marginTop: 8,
+		marginBottom: 10,
+		borderRadius: 10,
+		fontSize: 16,
+		lineHeight: 20,
+		padding: 8,
+		backgroundColor: "rgba(151, 151, 151, 0.25)",
+	},
+});
 
 export default App;
