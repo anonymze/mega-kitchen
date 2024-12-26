@@ -167,7 +167,7 @@ const MemoizedSections = React.memo(({ sections, selectedIds, onItemPress }: {
 }) => (
 	<>
 		{sections.map((section) => (
-			<View key={section.title} style={styles.bottomSheetContent}>
+			<View key={section.title} style={styles.bottomSheetListContent}>
 				<View style={styles.sectionHeaderContainer}>
 					<View style={styles.sectionHeader}>
 						<Text style={styles.sectionHeaderText}>{section.title}</Text>
@@ -261,7 +261,10 @@ const styles = StyleSheet.create({
 	// 	paddingBottom: 100,
 	// },
 	bottomSheetContent: {
-		marginBottom: 30,
+		marginBottom: 40,
+	},
+	bottomSheetListContent: {
+		marginBottom: 20,
 	},
 	footerContainer: {
 		flexDirection: "row",
