@@ -12,22 +12,14 @@ import TailwindConfig from "@/tailwind.config";
 interface Props {
 	titleModal: string;
 	placeholderSearch: string;
-	data: any;
+	data: {
+		title: string;
+		data: FoodItem[];
+	}[];
 	onSelect: (values: string[]) => void;
 }
 
-type FoodItem = (typeof fruits)[keyof typeof fruits];
-
-const initialSections = [
-	{
-		title: "Fruits",
-		data: Object.values(fruits),
-	},
-	{
-		title: "Légumes",
-		data: Object.values(vegetables),
-	},
-];
+type FoodItem = (typeof fruits)[keyof typeof fruits] | (typeof vegetables)[keyof typeof vegetables];
 
 const snapPoints = ["75%"];
 
@@ -38,9 +30,9 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 
 	// filter sections based on search query
 	const filteredSections = React.useMemo(() => {
-		if (!searchQuery) return initialSections;
+		if (!searchQuery) return data;
 
-		return initialSections
+		return data
 			.map((section) => ({
 				title: section.title,
 				data: section.data.filter((item) =>
@@ -59,7 +51,7 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 	}, [searchQuery]);
 
 	const renderSectionHeader = React.useCallback(
-		({ section }: { section: (typeof initialSections)[number] }) => (
+		({ section }: { section: (typeof data)[number] }) => (
 			<View style={styles.sectionHeaderContainer}>
 				<View style={styles.sectionHeader}>
 					<Text style={styles.sectionHeaderText}>{section.title}</Text>
