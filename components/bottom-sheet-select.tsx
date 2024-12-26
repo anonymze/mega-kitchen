@@ -134,47 +134,18 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 					onChangeText={setSearchQuery}
 				/>
 
-				<BottomSheetScrollView style={{ marginBottom: 40 }}>
-					{filteredSections.map((section) => (
-						<View key={section.title} style={{ marginBottom: 20 }}>
-							<View style={styles.sectionHeaderContainer}>
-								<View style={styles.sectionHeader}>
-									<Text style={styles.sectionHeaderText}>{section.title}</Text>
-								</View>
-							</View>
-							{section.data.map((item) => (
-								<Pressable
-									key={item.id}
-									style={[
-										styles.itemContainer,
-										selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
-									]}
-									onPress={() => {
-										if (selectedIds.find((id) => id.id === item.id)) {
-											setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
-										} else {
-											setSelectedIds((prev) => [...prev, item]);
-										}
-									}}
-								>
-									<Image
-										style={styles.itemImage}
-										contentFit="contain"
-										source={item.image}
-										alt={item.label.FR}
-									/>
-									<Text
-										style={[
-											styles.itemText,
-											selectedIds.find((id) => id.id === item.id) && styles.selectedItemText,
-										]}
-									>
-										{item.label.FR}
-									</Text>
-								</Pressable>
-							))}
-						</View>
-					))}
+				<BottomSheetScrollView style={styles.bottomSheetContent}>
+					<MemoizedSections 
+						sections={filteredSections} 
+						selectedIds={selectedIds}
+						onItemPress={(item) => {
+							if (selectedIds.find((id) => id.id === item.id)) {
+								setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
+							} else {
+								setSelectedIds((prev) => [...prev, item]);
+							}
+						}}
+					/>
 				</BottomSheetScrollView>
 
 				{/* <BottomSheetSectionList
@@ -189,6 +160,52 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 		</>
 	);
 }
+
+const MemoizedSections = React.memo(({ sections, selectedIds, onItemPress }: {
+	sections: Props['data'],
+	selectedIds: FoodItem[],
+	onItemPress: (item: FoodItem) => void
+}) => (
+	<>
+		{sections.map((section) => (
+			<View key={section.title} style={styles.bottomSheetContent}>
+				<View style={styles.sectionHeaderContainer}>
+					<View style={styles.sectionHeader}>
+						<Text style={styles.sectionHeaderText}>{section.title}</Text>
+					</View>
+				</View>
+				{section.data.map((item) => (
+					<Pressable
+						key={item.id}
+						style={[styles.itemContainer, selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground]}
+						onPress={() => onItemPress(item)}
+					>
+						<Image
+							style={styles.itemImage}
+							contentFit="contain"
+							source={item.image}
+							alt={item.label.FR}
+						/>
+						<Text
+							style={[
+								styles.itemText,
+								selectedIds.find((id) => id.id === item.id) && styles.selectedItemText,
+							]}
+						>
+							{item.label.FR}
+						</Text>
+					</Pressable>
+				))}
+			</View>
+		))}
+	</>
+), (prevProps, nextProps) => {
+	// optional: custom comparison function
+	return (
+		prevProps.sections === nextProps.sections &&
+		prevProps.selectedIds === nextProps.selectedIds
+	);
+});
 
 // WE ARE DEALING WITH A CONSEQUENT LIST, SO WE USE STYLE SHEET CSS
 // INSTEAD OF TAILWIND FOR PERFORMANCE REASONS
@@ -239,10 +256,13 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		backgroundColor: "rgba(151, 151, 151, 0.25)",
 	},
+	// bottomSheetContent: {
+	// 	backgroundColor: "white",
+	// 	paddingRight: 10,
+	// 	paddingBottom: 100,
+	// },
 	bottomSheetContent: {
-		backgroundColor: "white",
-		paddingRight: 10,
-		paddingBottom: 100,
+		marginBottom: 30,
 	},
 	footerContainer: {
 		flexDirection: "row",
