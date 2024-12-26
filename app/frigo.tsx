@@ -1,4 +1,4 @@
-import BottomSheetSelect, { FoodItem } from "@/components/ui/bottom-sheet-select";
+import BottomSheetSelect, { FoodItem } from "@/components/bottom-sheet-select";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { Heading } from "@/components/ui/heading";
