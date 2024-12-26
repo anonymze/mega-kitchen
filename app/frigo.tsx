@@ -1,10 +1,9 @@
-import { BottomSheetProvider } from "@gorhom/bottom-sheet/lib/typescript/contexts";
 import BottomSheetSelect, { FoodItem } from "@/components/ui/bottom-sheet-select";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { Heading } from "@/components/ui/heading";
-import { Button, Text, View } from "react-native";
 import vegetables from "@/utils/data/vegetables";
+import { Button, View } from "react-native";
 import fruits from "@/utils/data/fruits";
 import { Image } from "expo-image";
 import React from "react";
@@ -25,7 +24,6 @@ export default function Page() {
 	const [selectedValues, setSelectedValues] = React.useState<FoodItem[]>([]);
 
 	const getSelectecValues = (values: FoodItem[]) => {
-		console.log("values", values);
 		// bottom sheet share same reference for the same item, so it works
 		setSelectedValues((prev) => [...new Set([...prev, ...values])]);
 	};
@@ -47,10 +45,15 @@ export default function Page() {
 							Vos aliments :
 						</Heading>
 						<View className="flex-row flex-wrap gap-2">
-							{selectedValues.map((value) => (
-								<View key={value.id}>
+							{selectedValues.map((value, index) => (
+								<Animated.View 
+									key={value.id}
+									entering={FadeInDown.duration(300)
+										.delay(index * 80)
+										.springify()}
+								>
 									<Image source={value.image} style={{ width: 50, height: 50 }} />
-								</View>
+								</Animated.View>
 							))}
 						</View>
 					</View>
