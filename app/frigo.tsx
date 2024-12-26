@@ -25,41 +25,38 @@ export default function Page() {
 	const [selectedValues, setSelectedValues] = React.useState<FoodItem[]>([]);
 
 	const getSelectecValues = (values: FoodItem[]) => {
+		console.log("values", values);
 		// bottom sheet share same reference for the same item, so it works
 		setSelectedValues((prev) => [...new Set([...prev, ...values])]);
 	};
 
 	return (
-		<>
-			<GestureHandlerRootView>
-				<BottomSheetModalProvider>
-					<Heading level={1}>Composer avec mon Frigo</Heading>
+			<BottomSheetModalProvider>
+				<Heading level={1}>Composer avec mon Frigo</Heading>
 
-					<BottomSheetSelect
-						onSelect={getSelectecValues}
-						titleModal="Ouvrir le frigo"
-						data={initialSections}
-						placeholderSearch="Chercher un aliment"
-					/>
+				<BottomSheetSelect
+					onSelect={getSelectecValues}
+					titleModal="Ouvrir le frigo"
+					data={initialSections}
+					placeholderSearch="Chercher un aliment"
+				/>
 
-					{selectedValues.length > 0 && (
-						<View className="mb-6">
-							<Heading level={2} className="my-6">
-								Vos aliments :
-							</Heading>
-							<View className="flex-row flex-wrap gap-2">
-								{selectedValues.map((value) => (
-									<View key={value.id}>
-										<Image source={value.image} style={{ width: 50, height: 50 }} />
-									</View>
-								))}
-							</View>
+				{selectedValues.length > 0 && (
+					<View className="mb-6">
+						<Heading level={2} className="my-6">
+							Vos aliments :
+						</Heading>
+						<View className="flex-row flex-wrap gap-2">
+							{selectedValues.map((value) => (
+								<View key={value.id}>
+									<Image source={value.image} style={{ width: 50, height: 50 }} />
+								</View>
+							))}
 						</View>
-					)}
+					</View>
+				)}
 
-					<Button color="red" title="Chercher une recette" onPress={() => {}} />
-				</BottomSheetModalProvider>
-			</GestureHandlerRootView>
-		</>
+				<Button color="red" title="Chercher une recette" onPress={() => {}} />
+			</BottomSheetModalProvider>
 	);
 }

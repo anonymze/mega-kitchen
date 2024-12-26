@@ -65,35 +65,6 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 		[]
 	);
 
-	const renderFooter = React.useCallback(
-		(props: BottomSheetFooterProps) => (
-			<BottomSheetFooter {...props} bottomInset={24}>
-				<View style={styles.footerContainer}>
-					<Button
-						title="Effacer"
-						onPress={() => {
-							// reset inputs
-							setSelectedIds([]);
-							setSearchQuery("");
-						}}
-					/>
-					<Button
-						title="Ajouter"
-						onPress={() => {
-							onSelect(selectedIds);
-							sheetRef.current?.close();
-
-							// reset inputs
-							setSelectedIds([]);
-							setSearchQuery("");
-						}}
-					/>
-				</View>
-			</BottomSheetFooter>
-		),
-		[]
-	);
-
 	const renderItem = React.useCallback(
 		({ item }: { item: FoodItem }) => (
 			<Pressable
@@ -102,10 +73,14 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 					selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
 				]}
 				onPress={() => {
+					console.log("heyyyy");
+					console.log(item);
 					if (selectedIds.find((id) => id.id === item.id)) {
 						setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
 					} else {
 						setSelectedIds((prev) => [...prev, item]);
+						console.log("ici");
+						console.log(selectedIds);
 					}
 				}}
 			>
@@ -128,7 +103,31 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 				enablePanDownToClose={true}
 				enableDynamicSizing={false}
 				snapPoints={snapPoints}
-				footerComponent={renderFooter}
+				footerComponent={(props) => (
+					<BottomSheetFooter {...props}>
+						<View style={styles.footerContainer}>
+							<Button
+								title="Effacer"
+								onPress={() => {
+									// reset inputs
+									setSelectedIds([]);
+									setSearchQuery("");
+								}}
+							/>
+							<Button
+								title="Ajouter"
+								onPress={() => {
+									onSelect(selectedIds);
+									sheetRef.current?.close();
+
+									// // reset inputs
+									setSelectedIds([]);
+									setSearchQuery("");
+								}}
+							/>
+						</View>
+					</BottomSheetFooter>
+				)}
 			>
 				<BottomSheetTextInput
 					placeholder={placeholderSearch}
@@ -205,7 +204,6 @@ const styles = StyleSheet.create({
 	footerContainer: {
 		flexDirection: "row",
 		justifyContent: "space-around",
-		marginBottom: -30,
 		paddingVertical: 8,
 		backgroundColor: "#ffffff",
 	},
