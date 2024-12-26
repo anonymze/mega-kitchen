@@ -7,12 +7,13 @@ import { Image } from "expo-image";
 import React from "react";
 import { View, Button, Text, StyleSheet } from "react-native";
 import { Pressable } from "react-native-gesture-handler";
-import TailwindConfig from '@/tailwind.config';
+import TailwindConfig from "@/tailwind.config";
 
 interface Props {
 	titleModal: string;
 	placeholderSearch: string;
-	data: any
+	data: any;
+	onSelect: (values: string[]) => void;
 }
 
 type FoodItem = (typeof fruits)[keyof typeof fruits];
@@ -30,10 +31,10 @@ const initialSections = [
 
 const snapPoints = ["75%"];
 
-export default function BottomSheetSelect({ titleModal, placeholderSearch, data }: Props) {
+export default function BottomSheetSelect({ onSelect, titleModal, placeholderSearch, data }: Props) {
 	const sheetRef = React.useRef<BottomSheet>(null);
 	const [searchQuery, setSearchQuery] = React.useState("");
-	const [selectedId, setSelectedId] = React.useState<Array<string> | null>(null);
+	const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
 
 	// filter sections based on search query
 	const filteredSections = React.useMemo(() => {
@@ -71,57 +72,70 @@ export default function BottomSheetSelect({ titleModal, placeholderSearch, data 
 	const renderItem = React.useCallback(
 		({ item }: { item: FoodItem }) => (
 			<Pressable
-				style={[styles.itemContainer, selectedId?.includes(item.label.FR) && styles.selectedItemBackground]}
+				style={[styles.itemContainer, selectedIds?.includes(item.label.FR) && styles.selectedItemBackground]}
 				onPress={() => {
-					if (selectedId?.includes(item.label.FR)) {
-						setSelectedId(selectedId.filter((id) => id !== item.label.FR));
+					if (selectedIds?.includes(item.label.FR)) {
+						setSelectedIds(selectedIds.filter((id) => id !== item.label.FR));
 					} else {
-						setSelectedId([...(selectedId || []), item.label.FR]);
+						setSelectedIds((prev) => [...prev, item.label.FR]);
 					}
 				}}
 			>
 				<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
-				<Text style={[styles.itemText, selectedId?.includes(item.label.FR) && styles.selectedItemText]}>{item.label.FR}</Text>
+				<Text style={[styles.itemText, selectedIds?.includes(item.label.FR) && styles.selectedItemText]}>
+					{item.label.FR}
+				</Text>
 			</Pressable>
 		),
-		[selectedId]
+		[selectedIds]
 	);
 
 	return (
 		<>
-		<Button title={titleModal} onPress={() => sheetRef.current?.snapToIndex(0)} />
-		<BottomSheet
-			ref={sheetRef}
-			enablePanDownToClose={true}
-			enableDynamicSizing={false}
-			snapPoints={snapPoints}
-			index={-1}
-		>
-			<BottomSheetTextInput
-				placeholder={placeholderSearch}
-				style={styles.searchInput}
-				value={searchQuery}
-				onChangeText={setSearchQuery}
-			/>
-			<BottomSheetSectionList
-				sections={filteredSections}
-				renderItem={renderItem}
-				renderSectionHeader={renderSectionHeader}
-				contentContainerStyle={styles.bottomSheetContent}
-				keyExtractor={(item, _) => item.label.FR}
-			/>
-
-			<View className="flex-row justify-around">
-				<Button
-					title="Effacer"
-					onPress={() => {
-						setSelectedId(null);
-						setSearchQuery("");
-					}}
+			<Button title={titleModal} onPress={() => sheetRef.current?.snapToIndex(0)} />
+			<BottomSheet
+				ref={sheetRef}
+				enablePanDownToClose={true}
+				enableDynamicSizing={false}
+				snapPoints={snapPoints}
+				index={-1}
+			>
+				<BottomSheetTextInput
+					placeholder={placeholderSearch}
+					style={styles.searchInput}
+					value={searchQuery}
+					onChangeText={setSearchQuery}
 				/>
-				<Button title="Ajouter" onPress={() => sheetRef.current?.close()} />
-			</View>
-		</BottomSheet>
+				<BottomSheetSectionList
+					sections={filteredSections}
+					renderItem={renderItem}
+					renderSectionHeader={renderSectionHeader}
+					contentContainerStyle={styles.bottomSheetContent}
+					keyExtractor={(item, _) => item.label.FR}
+				/>
+
+				<View className="flex-row justify-around">
+					<Button
+						title="Effacer"
+						onPress={() => {
+							// reset inputs
+							setSelectedIds([]);
+							setSearchQuery("");
+						}}
+					/>
+					<Button
+						title="Ajouter"
+						onPress={() => {
+							onSelect(selectedIds);
+							sheetRef.current?.close();
+
+							// reset inputs
+							setSelectedIds([]);
+							setSearchQuery("");
+						}}
+					/>
+				</View>
+			</BottomSheet>
 		</>
 	);
 }
