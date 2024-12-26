@@ -130,7 +130,6 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 				<BottomSheetTextInput
 					placeholder={placeholderSearch}
 					style={styles.searchInput}
-					value={searchQuery}
 					onChangeText={setSearchQuery}
 				/>
 
