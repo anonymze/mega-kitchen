@@ -1,13 +1,16 @@
-import fruits from "@/utils/data/fruits";
-import vegetables from "@/utils/data/vegetables";
+import { View, Button, Text, StyleSheet } from "react-native";
 import { BottomSheetSectionList } from "@gorhom/bottom-sheet";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
+import { Pressable } from "react-native-gesture-handler";
+import vegetables from "@/utils/data/vegetables";
+import TailwindConfig from "@/tailwind.config";
 import BottomSheet from "@gorhom/bottom-sheet";
+import fruits from "@/utils/data/fruits";
 import { Image } from "expo-image";
 import React from "react";
-import { View, Button, Text, StyleSheet } from "react-native";
-import { Pressable } from "react-native-gesture-handler";
-import TailwindConfig from "@/tailwind.config";
+
+
+type FoodItem = typeof fruits[number] | typeof vegetables[number];
 
 interface Props {
 	titleModal: string;
@@ -18,8 +21,6 @@ interface Props {
 	}[];
 	onSelect: (values: string[]) => void;
 }
-
-type FoodItem = (typeof fruits)[keyof typeof fruits] | (typeof vegetables)[keyof typeof vegetables];
 
 const snapPoints = ["75%"];
 

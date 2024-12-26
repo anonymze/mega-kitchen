@@ -1,5 +1,6 @@
-export default {
-    ail: {
+export default [
+    {
+        id: "ail",
         co2: 0.36,
         image: require("@/assets/images/vegetables/ail.svg"),
         description: "bulbe composé de gousses à l'arôme et au goût prononcés, utilisé comme condiment",
@@ -7,7 +8,8 @@ export default {
             FR: "Ail",
         },
     },
-    artichaut: {
+    {
+        id: "artichaut",
         co2: 3.88,
         image: require("@/assets/images/vegetables/artichaut.svg"),
         description: "légume charnu composé de feuilles imbriquées et d'un cœur tendre",
@@ -15,7 +17,8 @@ export default {
             FR: "Artichaut",
         },
     },
-    asperge: {
+    {
+        id: "asperge",
         co2: 1.56,
         image: require("@/assets/images/vegetables/asperge.svg"),
         description: "pousse tendre et allongée, à la saveur délicate",
@@ -23,7 +26,8 @@ export default {
             FR: "Asperge",
         },
     },
-    aubergine: {
+    {
+        id: "aubergine",
         co2: 0.46,
         image: require("@/assets/images/vegetables/aubergine.svg"),
         description: "légume charnu à la peau violette brillante et à la chair fondante à la cuisson",
@@ -31,7 +35,8 @@ export default {
             FR: "Aubergine",
         },
     },
-    betterave: {
+    {
+        id: "betterave",
         co2: 0.36,
         image: require("@/assets/images/vegetables/betterave.svg"),
         description: "racine ronde à la chair rouge foncé, sucrée et terreuse",
@@ -39,7 +44,8 @@ export default {
             FR: "Betterave",
         },
     },
-    blette: {
+    {
+        id: "blette",
         co2: 0.54,
         image: require("@/assets/images/vegetables/blette.svg"),
         description: "légume-feuille aux côtes charnues et aux feuilles vertes tendres",
@@ -47,7 +53,8 @@ export default {
             FR: "Blette",
         },
     },
-    brocoli: {
+    {
+        id: "brocoli",
         co2: 0.9,
         image: require("@/assets/images/vegetables/brocoli.svg"),
         description: "légume vert en forme de bouquet d'inflorescences serrées",
@@ -55,7 +62,8 @@ export default {
             FR: "Brocoli",
         },
     },
-    carotte: {
+    {
+        id: "carotte",
         co2: 0.36,
         image: require("@/assets/images/vegetables/carotte.svg"),
         description: "racine orange, croquante et sucrée, riche en carotène",
@@ -63,7 +71,8 @@ export default {
             FR: "Carotte",
         },
     },
-    celeri: {
+    {
+        id: "celeri",
         co2: 0.68,
         image: require("@/assets/images/vegetables/celeri.svg"),
         description: "légume à côtes croquantes au goût caractéristique",
@@ -71,7 +80,8 @@ export default {
             FR: "Céleri",
         },
     },
-    champignon: {
+    {
+        id: "champignon",
         co2: 0.49,
         image: require("@/assets/images/vegetables/champignon.svg"),
         description: "champignon cultivé à la chair blanche et tendre",
@@ -79,7 +89,8 @@ export default {
             FR: "Champignon",
         },
     },
-    chou: {
+    {
+        id: "chou",
         co2: 0.86,
         image: require("@/assets/images/vegetables/chou.svg"),
         description: "légume en forme de boule composé de feuilles serrées",
@@ -87,7 +98,8 @@ export default {
             FR: "Chou",
         },
     },
-    chou_bruxelles: {
+    {
+        id: "chou_bruxelles",
         co2: 0.58,
         image: require("@/assets/images/vegetables/chou_bruxelles.svg"),
         description: "petit chou miniature à la saveur prononcée",
@@ -95,7 +107,8 @@ export default {
             FR: "Chou de Bruxelles",
         },
     },
-    chou_fleur: {
+    {
+        id: "chou_fleur",
         co2: 0.74,
         image: require("@/assets/images/vegetables/chou_fleur.svg"),
         description: "chou à l'inflorescence blanche et compacte",
@@ -103,7 +116,8 @@ export default {
             FR: "Chou-fleur",
         },
     },
-    concombre: {
+    {
+        id: "concombre",
         co2: 0.47,
         image: require("@/assets/images/vegetables/concombre.svg"),
         description: "légume cylindrique à la chair aqueuse et rafraîchissante",
@@ -111,7 +125,8 @@ export default {
             FR: "Concombre",
         },
     },
-    courge: {
+    {
+        id: "courge",
         co2: 0.62,
         image: require("@/assets/images/vegetables/courge.svg"),
         description: "légume d'automne à la chair orange et sucrée",
@@ -119,7 +134,8 @@ export default {
             FR: "Courge",
         },
     },
-    courgette: {
+    {
+        id: "courgette",
         co2: 0.48,
         image: require("@/assets/images/vegetables/courgette.svg"),
         description: "légume allongé à la chair tendre et délicate",
@@ -127,7 +143,8 @@ export default {
             FR: "Courgette",
         },
     },
-    cresson: {
+    {
+        id: "cresson",
         co2: 0.94,
         image: require("@/assets/images/vegetables/cresson.svg"),
         description: "plante aquatique aux petites feuilles au goût légèrement piquant",
@@ -135,7 +152,8 @@ export default {
             FR: "Cresson",
         },
     },
-    echalote: {
+    {
+        id: "echalote",
         co2: 0.36,
         image: require("@/assets/images/vegetables/echalote.svg"),
         description: "petit bulbe à la saveur plus fine que l'oignon",
@@ -143,7 +161,8 @@ export default {
             FR: "Échalote",
         },
     },
-    endive: {
+    {
+        id: "endive",
         co2: 0.94,
         image: require("@/assets/images/vegetables/endive.svg"),
         description: "pousse blanche et croquante aux feuilles serrées légèrement amères",
@@ -151,7 +170,8 @@ export default {
             FR: "Endive",
         },
     },
-    epinard: {
+    {
+        id: "epinard",
         co2: 0.39,
         image: require("@/assets/images/vegetables/epinard.svg"),
         description: "feuilles vertes tendres riches en fer",
@@ -159,7 +179,8 @@ export default {
             FR: "Épinard",
         },
     },
-    fenouil: {
+    {
+        id: "fenouil",
         co2: 0.96,
         image: require("@/assets/images/vegetables/fenouil.svg"),
         description: "légume bulbeux à la saveur anisée",
@@ -167,7 +188,8 @@ export default {
             FR: "Fenouil",
         },
     },
-    haricot_vert: {
+    {
+        id: "haricot_vert",
         co2: 0.41,
         image: require("@/assets/images/vegetables/haricot_vert.svg"),
         description: "gousse verte longue et fine à la chair tendre",
@@ -175,7 +197,8 @@ export default {
             FR: "Haricot vert",
         },
     },
-    laitue: {
+    {
+        id: "laitue",
         co2: 0.94,
         image: require("@/assets/images/vegetables/laitue.svg"),
         description: "salade aux feuilles tendres disposées en rosette",
@@ -183,7 +206,8 @@ export default {
             FR: "Laitue",
         },
     },
-    mache: {
+    {
+        id: "mache",
         co2: 0.94,
         image: require("@/assets/images/vegetables/mache.svg"),
         description: "petites rosettes de feuilles tendres au goût délicat",
@@ -191,7 +215,8 @@ export default {
             FR: "Mâche",
         },
     },
-    mais: {
+    {
+        id: "mais",
         co2: 0.81,
         image: require("@/assets/images/vegetables/mais.svg"),
         description: "épi de grains jaunes dorés, doux et sucrés",
@@ -199,7 +224,8 @@ export default {
             FR: "Maïs",
         },
     },
-    navet: {
+    {
+        id: "navet",
         co2: 0.36,
         image: require("@/assets/images/vegetables/navet.svg"),
         description: "racine ronde à la chair blanche légèrement piquante",
@@ -207,7 +233,8 @@ export default {
             FR: "Navet",
         },
     },
-    oignon: {
+    {
+        id: "oignon",
         co2: 0.39,
         image: require("@/assets/images/vegetables/oignon.svg"),
         description: "bulbe à la saveur prononcée, base de nombreuses préparations culinaires",
@@ -215,7 +242,8 @@ export default {
             FR: "Oignon",
         },
     },
-    panais: {
+    {
+        id: "panais",
         co2: 0.46,
         image: require("@/assets/images/vegetables/panais.svg"),
         description: "racine blanche semblable à la carotte au goût sucré et parfumé",
@@ -223,7 +251,8 @@ export default {
             FR: "Panais",
         },
     },
-    pasteque: {
+    {
+        id: "pasteque",
         co2: 0.64,
         image: require("@/assets/images/vegetables/pasteque.svg"),
         description: "gros fruit à la chair rouge très rafraîchissante",
@@ -231,7 +260,8 @@ export default {
             FR: "Pastèque",
         },
     },
-    petit_pois: {
+    {
+        id: "petit_pois",
         co2: 0.67,
         image: require("@/assets/images/vegetables/petit_pois.svg"),
         description: "petites graines rondes et vertes à la saveur sucrée",
@@ -239,7 +269,8 @@ export default {
             FR: "Petit pois",
         },
     },
-    poireau: {
+    {
+        id: "poireau",
         co2: 0.77,
         image: require("@/assets/images/vegetables/poireau.svg"),
         description: "légume allongé au fût blanc et aux feuilles vertes",
@@ -247,7 +278,8 @@ export default {
             FR: "Poireau",
         },
     },
-    poivron: {
+    {
+        id: "poivron",
         co2: 1.18,
         image: require("@/assets/images/vegetables/poivron.svg"),
         description: "légume charnu et creux aux couleurs variées",
@@ -255,7 +287,8 @@ export default {
             FR: "Poivron",
         },
     },
-    potiron: {
+    {
+        id: "potiron",
         co2: 0.62,
         image: require("@/assets/images/vegetables/potiron.svg"),
         description: "grosse courge à la chair orange, douce et sucrée",
@@ -263,7 +296,8 @@ export default {
             FR: "Potiron",
         },
     },
-    radis: {
+    {
+        id: "radis",
         co2: 0.61,
         image: require("@/assets/images/vegetables/radis.svg"),
         description: "petit légume rond et rouge à la saveur piquante",
@@ -271,7 +305,8 @@ export default {
             FR: "Radis",
         },
     },
-    rhubarbe: {
+    {
+        id: "rhubarbe",
         co2: 0.72,
         image: require("@/assets/images/vegetables/rhubarbe.svg"),
         description: "tiges charnues à la saveur acidulée",
@@ -279,7 +314,8 @@ export default {
             FR: "Rhubarbe",
         },
     },
-    salsifis: {
+    {
+        id: "salsifis",
         co2: 0.46,
         image: require("@/assets/images/vegetables/salsifis.svg"),
         description: "racine allongée à la chair blanche et au goût délicat",
@@ -287,7 +323,8 @@ export default {
             FR: "Salsifis",
         },
     },
-    tomate: {
+    {
+        id: "tomate",
         co2: 0.58,
         image: require("@/assets/images/vegetables/tomate.svg"),
         description: "fruit rouge et charnu à la chair juteuse",
@@ -295,7 +332,8 @@ export default {
             FR: "Tomate",
         },
     },
-    topinambour: {
+    {
+        id: "topinambour",
         co2: 0.51,
         image: require("@/assets/images/vegetables/topinambour.svg"),
         description: "tubercule à la peau brune et à la chair blanche au goût proche de l'artichaut",
@@ -303,4 +341,4 @@ export default {
             FR: "Topinambour",
         },
     },
-};
+];

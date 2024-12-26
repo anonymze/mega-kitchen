@@ -1,29 +1,24 @@
-import { P } from "@/components/ui/p";
+import Animated, { clamp, ReduceMotion, useSharedValue, withDelay, withSpring, } from "react-native-reanimated";
+import fruits_vegetables_months from "@/utils/data/fruits_vegetables_months";
 import { useLocalSearchParams } from "expo-router/build/hooks";
+import { Heading } from "@/components/ui/heading";
+import vegetables from "@/utils/data/vegetables";
+import fruits from "@/utils/data/fruits";
+import { P } from "@/components/ui/p";
+import { router } from "expo-router";
 import { View } from "react-native";
 import { Image } from "expo-image";
-import { router } from "expo-router";
-import fruits from "@/utils/data/fruits";
-import vegetables from "@/utils/data/vegetables";
-import fruits_vegetables_months from "@/utils/data/fruits_vegetables_months";
-import Animated, {
-	clamp,
-	ReduceMotion,
-	useSharedValue,
-	withDelay,
-	withSpring,
-} from "react-native-reanimated";
 import React from "react";
-import { Heading } from "@/components/ui/heading";
+
 
 type Product =
 	| {
-			id: keyof typeof fruits;
-			type: "fruit";
+			id?: string;
+			type?: "fruit";
 	  }
 	| {
-			id: keyof typeof vegetables;
-			type: "vegetable";
+			id?: string;
+			type?: "vegetable";
 	  };
 
 // MANGUE
@@ -32,9 +27,14 @@ const MAX_KGS_CO2 = 15;
 export default function Modal() {
 	const width = useSharedValue<`${number}%`>("0%");
 	const params = useLocalSearchParams<Product>();
-	if (!params.id || !params.type) return router.back();
 
-	const product = params.type === "fruit" ? fruits[params.id] : vegetables[params.id];
+	const product =
+		params.type === "fruit"
+			? fruits.find((fruit) => fruit.id === params.id)
+			: vegetables.find((vegetable) => vegetable.id === params.id);
+
+	if (!product) return router.back();
+
 	const percentage = (product.co2 / MAX_KGS_CO2) * 100;
 	// duration is between 500ms and 600ms
 	const duration = clamp(percentage * 20, 500, 600);
