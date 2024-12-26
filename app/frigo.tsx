@@ -1,9 +1,9 @@
 import BottomSheetSelect, { FoodItem } from "@/components/ui/bottom-sheet-select";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated, { FadeInDown } from "react-native-reanimated";
 import { Heading } from "@/components/ui/heading";
+import { Button, Text, View } from "react-native";
 import vegetables from "@/utils/data/vegetables";
-import { Button, View } from "react-native";
 import fruits from "@/utils/data/fruits";
 import { Image } from "expo-image";
 import React from "react";
@@ -30,37 +30,43 @@ export default function Page() {
 	};
 
 	return (
-			<BottomSheetModalProvider>
-				<Heading level={1}>Composer avec mon Frigo</Heading>
+		<BottomSheetModalProvider>
+			<Heading level={1}>Composer avec mon Frigo</Heading>
 
-				<BottomSheetSelect
-					onSelect={getSelectecValues}
-					titleModal="Ouvrir le frigo"
-					data={initialSections}
-					placeholderSearch="Chercher un aliment"
-				/>
+			<BottomSheetSelect
+				onSelect={getSelectecValues}
+				titleModal="Ouvrir le frigo"
+				data={initialSections}
+				placeholderSearch="Chercher un aliment"
+			/>
 
-				{selectedValues.length > 0 && (
-					<View className="mb-6">
-						<Heading level={2} className="my-6">
-							Vos aliments :
-						</Heading>
-						<View className="flex-row flex-wrap gap-4">
-							{selectedValues.map((value) => (
-								<Animated.View 
-									key={value.id}
-									entering={FadeInDown.duration(300)
-										.delay(latestBatchRef.current.indexOf(value) * 100)
-										.springify()}
-								>
-									<Image source={value.image} style={{ width: 50, height: 50 }} />
-								</Animated.View>
-							))}
-						</View>
+			{selectedValues.length > 0 && (
+				<View>
+					<Heading level={2} className="my-6">
+						Vos aliments :
+					</Heading>
+					<View className="flex-row flex-wrap gap-4 mb-6">
+						{selectedValues.map((value) => (
+							<Animated.View
+								key={value.id}
+								entering={FadeInDown.duration(300)
+									.delay(latestBatchRef.current.indexOf(value) * 100)
+									.springify()}
+							>
+								<Image source={value.image} style={{ width: 50, height: 50 }} />
+							</Animated.View>
+						))}
 					</View>
-				)}
 
-				<Button color="red" title="Chercher une recette" onPress={() => {}} />
-			</BottomSheetModalProvider>
+					{selectedValues.length >= 3 ? (
+						<Button color="red" title="Chercher une recette" onPress={() => {}} />
+					) : (
+						<Text className="text-center text-gray-500">
+							Ajouter au moins 3 aliments pour chercher une recette.
+						</Text>
+					)}
+				</View>
+			)}
+		</BottomSheetModalProvider>
 	);
 }
