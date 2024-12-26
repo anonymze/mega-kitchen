@@ -22,9 +22,10 @@ const initialSections = [
 
 export default function Page() {
 	const [selectedValues, setSelectedValues] = React.useState<FoodItem[]>([]);
+	const latestBatchRef = React.useRef<FoodItem[]>([]);
 
 	const getSelectecValues = (values: FoodItem[]) => {
-		// bottom sheet share same reference for the same item, so it works
+		latestBatchRef.current = values;
 		setSelectedValues((prev) => [...new Set([...prev, ...values])]);
 	};
 
@@ -44,12 +45,12 @@ export default function Page() {
 						<Heading level={2} className="my-6">
 							Vos aliments :
 						</Heading>
-						<View className="flex-row flex-wrap gap-2">
-							{selectedValues.map((value, index) => (
+						<View className="flex-row flex-wrap gap-4">
+							{selectedValues.map((value) => (
 								<Animated.View 
 									key={value.id}
 									entering={FadeInDown.duration(300)
-										.delay(index * 80)
+										.delay(latestBatchRef.current.indexOf(value) * 100)
 										.springify()}
 								>
 									<Image source={value.image} style={{ width: 50, height: 50 }} />
