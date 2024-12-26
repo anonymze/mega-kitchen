@@ -73,14 +73,10 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 					selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
 				]}
 				onPress={() => {
-					console.log("heyyyy");
-					console.log(item);
 					if (selectedIds.find((id) => id.id === item.id)) {
 						setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
 					} else {
 						setSelectedIds((prev) => [...prev, item]);
-						console.log("ici");
-						console.log(selectedIds);
 					}
 				}}
 			>
