@@ -6,7 +6,8 @@ const config = getDefaultConfig(__dirname);
 // Adds support for files that are not supported by base config
 config.resolver.assetExts.push(
   'lottie',
-  'woff2'
+  'woff2',
+  'json'
 );
 
 module.exports = withNativeWind(config, { input: "./styles/app.css" });

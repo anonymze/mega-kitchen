@@ -5,18 +5,17 @@ import React from "react";
 
 
 interface AnimatedScreenProps {
+	duration?: number;
 	setShowAnimation: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function AnimationSplashscreen({ setShowAnimation }: AnimatedScreenProps) {
+export default function AnimationSplashscreen({ setShowAnimation, duration = 2000 }: AnimatedScreenProps) {
 	const animationRef = React.useRef<LottieView>(null);
 
 	React.useEffect(() => {
-		// weird bug, i have to set the animation for the next tick 
-		// otherwise the animation is not launching after splashScreen
 		setTimeout(() => {
-			animationRef.current?.play();
-		}, 1);
+			animationRef.current?.resume();
+		}, duration);
 	}, []);
 
 	return (
@@ -24,14 +23,14 @@ export default function AnimationSplashscreen({ setShowAnimation }: AnimatedScre
 			<Link href="/">debug</Link>
 			<LottieView
 				ref={animationRef}
-				loop={false}
+				loop={true}
 				autoPlay
 				style={{
 					width: 200,
 					height: 200,
 					backgroundColor: "#ffffff",
 				}}
-				source={require("@/resources/cooking2.lottie")}
+				source={require("@/resources/cooking.json")}
 				onAnimationFinish={() => setShowAnimation(false)}
 			/>
 		</View>
