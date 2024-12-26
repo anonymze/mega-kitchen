@@ -1,4 +1,4 @@
-import { BottomSheetFooter, BottomSheetSectionList, BottomSheetFooterProps, BottomSheetModal, } from "@gorhom/bottom-sheet";
+import { BottomSheetFooter, BottomSheetSectionList, BottomSheetFooterProps, BottomSheetModal, BottomSheetScrollView, } from "@gorhom/bottom-sheet";
 import { View, Button, Text, StyleSheet } from "react-native";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { Pressable } from "react-native-gesture-handler";
@@ -54,41 +54,67 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 			.filter((section) => section.data.length > 0); // Remove empty sections
 	}, [searchQuery]);
 
-	const renderSectionHeader = React.useCallback(
-		({ section }: { section: (typeof data)[number] }) => (
-			<View style={styles.sectionHeaderContainer}>
-				<View style={styles.sectionHeader}>
-					<Text style={styles.sectionHeaderText}>{section.title}</Text>
-				</View>
-			</View>
-		),
-		[]
-	);
+	// const renderSectionHeader = React.useCallback(
+	// 	({ section }: { section: (typeof data)[number] }) => (
+	// 		<View style={styles.sectionHeaderContainer}>
+	// 			<View style={styles.sectionHeader}>
+	// 				<Text style={styles.sectionHeaderText}>{section.title}</Text>
+	// 			</View>
+	// 		</View>
+	// 	),
+	// 	[]
+	// );
 
-	const renderItem = React.useCallback(
-		({ item }: { item: FoodItem }) => (
-			<Pressable
-				style={[
-					styles.itemContainer,
-					selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
-				]}
-				onPress={() => {
-					if (selectedIds.find((id) => id.id === item.id)) {
-						setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
-					} else {
-						setSelectedIds((prev) => [...prev, item]);
-					}
-				}}
-			>
-				<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
-				<Text
-					style={[styles.itemText, selectedIds.find((id) => id.id === item.id) && styles.selectedItemText]}
-				>
-					{item.label.FR}
-				</Text>
-			</Pressable>
+	// const renderItem = React.useCallback(
+	// 	({ item }: { item: FoodItem }) => (
+	// 		<Pressable
+	// 			style={[
+	// 				styles.itemContainer,
+	// 				selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
+	// 			]}
+	// 			onPress={() => {
+	// 				if (selectedIds.find((id) => id.id === item.id)) {
+	// 					setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
+	// 				} else {
+	// 					setSelectedIds((prev) => [...prev, item]);
+	// 				}
+	// 			}}
+	// 		>
+	// 			<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
+	// 			<Text
+	// 				style={[styles.itemText, selectedIds.find((id) => id.id === item.id) && styles.selectedItemText]}
+	// 			>
+	// 				{item.label.FR}
+	// 			</Text>
+	// 		</Pressable>
+	// 	),
+	// 	[selectedIds]
+	// );
+
+	const renderFooter = React.useCallback(
+		(props: BottomSheetFooterProps) => (
+			<BottomSheetFooter {...props}>
+				<View style={styles.footerContainer}>
+					<Button
+						title="Effacer"
+						onPress={() => {
+							setSelectedIds([]);
+							setSearchQuery("");
+						}}
+					/>
+					<Button
+						title="Ajouter"
+						onPress={() => {
+							onSelect(selectedIds);
+							sheetRef.current?.close();
+							setSelectedIds([]);
+							setSearchQuery("");
+						}}
+					/>
+				</View>
+			</BottomSheetFooter>
 		),
-		[selectedIds]
+		[onSelect, selectedIds]
 	);
 
 	return (
@@ -99,31 +125,7 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 				enablePanDownToClose={true}
 				enableDynamicSizing={false}
 				snapPoints={snapPoints}
-				footerComponent={(props) => (
-					<BottomSheetFooter {...props}>
-						<View style={styles.footerContainer}>
-							<Button
-								title="Effacer"
-								onPress={() => {
-									// reset inputs
-									setSelectedIds([]);
-									setSearchQuery("");
-								}}
-							/>
-							<Button
-								title="Ajouter"
-								onPress={() => {
-									onSelect(selectedIds);
-									sheetRef.current?.close();
-
-									// // reset inputs
-									setSelectedIds([]);
-									setSearchQuery("");
-								}}
-							/>
-						</View>
-					</BottomSheetFooter>
-				)}
+				footerComponent={renderFooter}
 			>
 				<BottomSheetTextInput
 					placeholder={placeholderSearch}
@@ -131,13 +133,58 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 					value={searchQuery}
 					onChangeText={setSearchQuery}
 				/>
-				<BottomSheetSectionList
+
+				<BottomSheetScrollView style={{ marginBottom: 40 }}>
+					{filteredSections.map((section) => (
+						<View key={section.title} style={{ marginBottom: 20 }}>
+							<View style={styles.sectionHeaderContainer}>
+								<View style={styles.sectionHeader}>
+									<Text style={styles.sectionHeaderText}>{section.title}</Text>
+								</View>
+							</View>
+							{section.data.map((item) => (
+								<Pressable
+									key={item.id}
+									style={[
+										styles.itemContainer,
+										selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
+									]}
+									onPress={() => {
+										if (selectedIds.find((id) => id.id === item.id)) {
+											setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
+										} else {
+											setSelectedIds((prev) => [...prev, item]);
+										}
+									}}
+								>
+									<Image
+										style={styles.itemImage}
+										contentFit="contain"
+										source={item.image}
+										alt={item.label.FR}
+									/>
+									<Text
+										style={[
+											styles.itemText,
+											selectedIds.find((id) => id.id === item.id) && styles.selectedItemText,
+										]}
+									>
+										{item.label.FR}
+									</Text>
+								</Pressable>
+							))}
+						</View>
+					))}
+				</BottomSheetScrollView>
+
+				{/* <BottomSheetSectionList
+					maxToRenderPerBatch={1}			
 					sections={filteredSections}
 					renderItem={renderItem}
 					renderSectionHeader={renderSectionHeader}
 					contentContainerStyle={styles.bottomSheetContent}
 					keyExtractor={(item) => item.id}
-				/>
+				/> */}
 			</BottomSheetModal>
 		</>
 	);
@@ -159,7 +206,7 @@ const styles = StyleSheet.create({
 		marginBottom: 6,
 	},
 	sectionHeaderText: {
-		color: "#FFFFFF",
+		color: "#ffffff",
 		fontSize: 18,
 		fontWeight: "bold",
 	},
