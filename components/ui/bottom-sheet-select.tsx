@@ -10,7 +10,7 @@ import { Image } from "expo-image";
 import React from "react";
 
 
-type FoodItem = typeof fruits[number] | typeof vegetables[number];
+export type FoodItem = (typeof fruits)[number] | (typeof vegetables)[number];
 
 interface Props {
 	titleModal: string;
@@ -19,7 +19,7 @@ interface Props {
 		title: string;
 		data: FoodItem[];
 	}[];
-	onSelect: (values: string[]) => void;
+	onSelect: (values: FoodItem[]) => void;
 }
 
 const snapPoints = ["75%"];
@@ -27,7 +27,7 @@ const snapPoints = ["75%"];
 export default function BottomSheetSelect({ onSelect, titleModal, placeholderSearch, data }: Props) {
 	const sheetRef = React.useRef<BottomSheet>(null);
 	const [searchQuery, setSearchQuery] = React.useState("");
-	const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
+	const [selectedIds, setSelectedIds] = React.useState<FoodItem[]>([]);
 
 	// filter sections based on search query
 	const filteredSections = React.useMemo(() => {
@@ -65,17 +65,22 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 	const renderItem = React.useCallback(
 		({ item }: { item: FoodItem }) => (
 			<Pressable
-				style={[styles.itemContainer, selectedIds?.includes(item.label.FR) && styles.selectedItemBackground]}
+				style={[
+					styles.itemContainer,
+					selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
+				]}
 				onPress={() => {
-					if (selectedIds?.includes(item.label.FR)) {
-						setSelectedIds(selectedIds.filter((id) => id !== item.label.FR));
+					if (selectedIds.find((id) => id.id === item.id)) {
+						setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
 					} else {
-						setSelectedIds((prev) => [...prev, item.label.FR]);
+						setSelectedIds((prev) => [...prev, item]);
 					}
 				}}
 			>
 				<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
-				<Text style={[styles.itemText, selectedIds?.includes(item.label.FR) && styles.selectedItemText]}>
+				<Text
+					style={[styles.itemText, selectedIds.find((id) => id.id === item.id) && styles.selectedItemText]}
+				>
 					{item.label.FR}
 				</Text>
 			</Pressable>
@@ -104,7 +109,7 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 					renderItem={renderItem}
 					renderSectionHeader={renderSectionHeader}
 					contentContainerStyle={styles.bottomSheetContent}
-					keyExtractor={(item, _) => item.label.FR}
+					keyExtractor={(item) => item.id}
 				/>
 
 				<View className="flex-row justify-around">
