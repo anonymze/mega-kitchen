@@ -4,6 +4,7 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { Heading } from "@/components/ui/heading";
 import { Button, Text, View } from "react-native";
 import vegetables from "@/utils/data/vegetables";
+import { Link, router } from "expo-router";
 import fruits from "@/utils/data/fruits";
 import { Image } from "expo-image";
 import React from "react";
@@ -31,6 +32,7 @@ export default function Page() {
 
 	return (
 		<BottomSheetModalProvider>
+			<Link href="/">Retour</Link>
 			<Heading level={1}>Composer avec mon Frigo</Heading>
 
 			<BottomSheetSelect
@@ -58,8 +60,10 @@ export default function Page() {
 						))}
 					</View>
 
-					{selectedValues.length >= 3 ? (
-						<Button color="red" title="Chercher une recette" onPress={() => {}} />
+					{selectedValues.length >= 1 ? (
+						<Button color="red" title="Chercher une recette" onPress={() => {
+							router.push("/(recipes)/recipes");
+						}} />
 					) : (
 						<Text className="text-center text-gray-500">
 							Ajouter au moins 3 aliments pour chercher une recette.
