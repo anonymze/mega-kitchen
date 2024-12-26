@@ -1,13 +1,15 @@
-import "@/styles/app.css";
 import "react-native-reanimated";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import "@/styles/app.css";
+
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import AnimationSplashscreen from "@/components/animation-splashscreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

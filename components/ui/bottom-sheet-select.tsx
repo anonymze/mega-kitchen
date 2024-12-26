@@ -1,10 +1,9 @@
+import { BottomSheetFooter, BottomSheetSectionList, BottomSheetFooterProps, BottomSheetModal, } from "@gorhom/bottom-sheet";
 import { View, Button, Text, StyleSheet } from "react-native";
-import { BottomSheetSectionList } from "@gorhom/bottom-sheet";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { Pressable } from "react-native-gesture-handler";
 import vegetables from "@/utils/data/vegetables";
 import TailwindConfig from "@/tailwind.config";
-import BottomSheet from "@gorhom/bottom-sheet";
 import fruits from "@/utils/data/fruits";
 import { Image } from "expo-image";
 import React from "react";
@@ -25,9 +24,13 @@ interface Props {
 const snapPoints = ["75%"];
 
 export default function BottomSheetSelect({ onSelect, titleModal, placeholderSearch, data }: Props) {
-	const sheetRef = React.useRef<BottomSheet>(null);
+	const sheetRef = React.useRef<BottomSheetModal>(null);
 	const [searchQuery, setSearchQuery] = React.useState("");
 	const [selectedIds, setSelectedIds] = React.useState<FoodItem[]>([]);
+
+	const handlePresentModalPress = React.useCallback(() => {
+		sheetRef.current?.present();
+	}, []);
 
 	// filter sections based on search query
 	const filteredSections = React.useMemo(() => {
@@ -62,6 +65,35 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 		[]
 	);
 
+	const renderFooter = React.useCallback(
+		(props: BottomSheetFooterProps) => (
+			<BottomSheetFooter {...props} bottomInset={24}>
+				<View style={styles.footerContainer}>
+					<Button
+						title="Effacer"
+						onPress={() => {
+							// reset inputs
+							setSelectedIds([]);
+							setSearchQuery("");
+						}}
+					/>
+					<Button
+						title="Ajouter"
+						onPress={() => {
+							onSelect(selectedIds);
+							sheetRef.current?.close();
+
+							// reset inputs
+							setSelectedIds([]);
+							setSearchQuery("");
+						}}
+					/>
+				</View>
+			</BottomSheetFooter>
+		),
+		[]
+	);
+
 	const renderItem = React.useCallback(
 		({ item }: { item: FoodItem }) => (
 			<Pressable
@@ -90,13 +122,13 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 
 	return (
 		<>
-			<Button title={titleModal} onPress={() => sheetRef.current?.snapToIndex(0)} />
-			<BottomSheet
+			<Button title={titleModal} onPress={handlePresentModalPress} />
+			<BottomSheetModal
 				ref={sheetRef}
 				enablePanDownToClose={true}
 				enableDynamicSizing={false}
 				snapPoints={snapPoints}
-				index={-1}
+				footerComponent={renderFooter}
 			>
 				<BottomSheetTextInput
 					placeholder={placeholderSearch}
@@ -111,29 +143,7 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 					contentContainerStyle={styles.bottomSheetContent}
 					keyExtractor={(item) => item.id}
 				/>
-
-				<View className="flex-row justify-around">
-					<Button
-						title="Effacer"
-						onPress={() => {
-							// reset inputs
-							setSelectedIds([]);
-							setSearchQuery("");
-						}}
-					/>
-					<Button
-						title="Ajouter"
-						onPress={() => {
-							onSelect(selectedIds);
-							sheetRef.current?.close();
-
-							// reset inputs
-							setSelectedIds([]);
-							setSearchQuery("");
-						}}
-					/>
-				</View>
-			</BottomSheet>
+			</BottomSheetModal>
 		</>
 	);
 }
@@ -190,5 +200,13 @@ const styles = StyleSheet.create({
 	bottomSheetContent: {
 		backgroundColor: "white",
 		paddingRight: 10,
+		paddingBottom: 100,
+	},
+	footerContainer: {
+		flexDirection: "row",
+		justifyContent: "space-around",
+		marginBottom: -30,
+		paddingVertical: 8,
+		backgroundColor: "#ffffff",
 	},
 });
