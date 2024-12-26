@@ -1,7 +1,7 @@
 import BottomSheetSelect, { FoodItem } from "@/components/ui/bottom-sheet-select";
 import { Heading } from "@/components/ui/heading";
+import { Button, Text, View } from "react-native";
 import vegetables from "@/utils/data/vegetables";
-import { Text, View } from "react-native";
 import fruits from "@/utils/data/fruits";
 import { Image } from "expo-image";
 import React from "react";
@@ -37,9 +37,11 @@ export default function Page() {
 				placeholderSearch="Chercher un aliment"
 			/>
 
+			<Button color="red" title="Chercher une recette" onPress={() => {}} />
+
 			{selectedValues.length > 0 && (
-				<View>
-					<Heading level={2} className="my-4">Vos aliments :</Heading>
+				<View className="mb-6">
+					<Heading level={2} className="my-6">Vos aliments :</Heading>
 					<View className="flex-row flex-wrap gap-2">
 						{selectedValues.map((value) => (
 							<View key={value.id}>
