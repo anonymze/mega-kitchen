@@ -29,7 +29,7 @@ export default function Page() {
 	return (
 		<>
 			<Heading level={1}>Composer avec mon Frigo</Heading>
-			
+
 			<BottomSheetSelect
 				onSelect={getSelectecValues}
 				titleModal="Ouvrir le frigo"
@@ -37,11 +37,11 @@ export default function Page() {
 				placeholderSearch="Chercher un aliment"
 			/>
 
-			<Button color="red" title="Chercher une recette" onPress={() => {}} />
-
 			{selectedValues.length > 0 && (
 				<View className="mb-6">
-					<Heading level={2} className="my-6">Vos aliments :</Heading>
+					<Heading level={2} className="my-6">
+						Vos aliments :
+					</Heading>
 					<View className="flex-row flex-wrap gap-2">
 						{selectedValues.map((value) => (
 							<View key={value.id}>
@@ -51,6 +51,8 @@ export default function Page() {
 					</View>
 				</View>
 			)}
+
+			<Button color="red" title="Chercher une recette" onPress={() => {}} />
 		</>
 	);
 }
