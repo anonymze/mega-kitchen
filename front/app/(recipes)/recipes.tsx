@@ -15,7 +15,6 @@ export default function Page() {
   if (error) return <Text>{error.message}</Text>;
 
   return (
-    <SafeAreaView style={{ height: '100%' }}>
       <View
         style={{
           height: '95%',
@@ -57,6 +56,5 @@ export default function Page() {
           />
         </View>
       </View>
-    </SafeAreaView>
   );
 }
