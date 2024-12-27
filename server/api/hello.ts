@@ -1,7 +1,9 @@
 import { ipAddress } from '@vercel/functions';
+import { getEnv } from '@vercel/functions';
+
+
 // if you need to delay the timeout, you can use this
 // import { waitUntil } from '@vercel/functions';
-import { getEnv } from '@vercel/functions';
 
 
 export const config = {
