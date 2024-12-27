@@ -1,6 +1,8 @@
 import { Request, Response } from '@edge-runtime/primitives'
 
-export const runtime = 'edge';
+export const config = {
+  runtime: 'edge',
+}
 
 export function GET(request: Request) {
   return new Response().json({
