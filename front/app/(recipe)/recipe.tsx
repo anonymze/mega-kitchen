@@ -33,8 +33,8 @@ export default function Page() {
 					<ScrollView className="flex-1">
 						<Text>{completion}</Text>
 					</ScrollView>
-					<View className="absolute bottom-10 w-full">
-						{isLoading && (
+					{isLoading && (
+						<View className="absolute bottom-10 w-full">
 							<Animated.View entering={FadeInDown.duration(300).springify()}>
 								<Loader2Icon
 									color={TailwindConfig.theme.colors.primary}
@@ -44,8 +44,8 @@ export default function Page() {
 									size={45}
 								/>
 							</Animated.View>
-						)}
-					</View>
+						</View>
+					)}
 				</View>
 			)}
 		</>
