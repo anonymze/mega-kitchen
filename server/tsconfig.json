@@ -1,0 +1,42 @@
+{
+	"compilerOptions": {
+		/* Base Options: */
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "es2022",
+		"verbatimModuleSyntax": true,
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"allowImportingTsExtensions": false,
+
+		/* Strictness */
+		"strict": true,
+		// prevents you from accessing an array or object without first checking if it's defined
+		"noUncheckedIndexedAccess": true,
+		/* if true you can import default from a module that doesn't have a default export */
+		// "allowSyntheticDefaultImports": true,
+		/* check a return is for sure returned */
+		"noImplicitReturns": true,
+		// prevent using wrong casing naming files for system with case sensitive (linux)
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitAny": true,
+		/* ensures that a case have a return / throw / break */
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedParameters": true,
+		"noUnusedLocals": true,
+
+		"module" : "nodenext",
+		"moduleResolution": "nodenext",
+		"sourceMap": true,
+		"incremental": true,
+		"noEmit": true,
+
+		/* if your code doesn't run in the DOM: */
+		"lib": ["es2022"],
+	},
+
+	/* where all files ts to CHECK are located */
+	"include": ["**/*.ts"],
+	"exclude": ["node_modules"]
+}
