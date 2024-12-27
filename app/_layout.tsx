@@ -35,29 +35,32 @@ export default function RootLayout() {
 	return (
 		<GestureHandlerRootView>
 			<SafeAreaProvider>
-				<SafeAreaView className="flex-1 p-4">
-						{showAnimation ? (
-							<AnimationSplashscreen setShowAnimation={setShowAnimation} />
-						) : (
-							<Stack
-								screenOptions={{
-									contentStyle: { backgroundColor: "#ffffff" },
-									headerShown: false,
-								}}
-							>
-								<Stack.Screen name="frigo" />
-								<Stack.Screen name="(recipes)" options={{
+				<SafeAreaView style={{ flex: 1 }}>
+					{showAnimation ? (
+						<AnimationSplashscreen setShowAnimation={setShowAnimation} />
+					) : (
+						<Stack
+							screenOptions={{
+								contentStyle: { backgroundColor: "#ffffff" },
+								headerShown: false,
+							}}
+						>
+							<Stack.Screen name="frigo" />
+							<Stack.Screen
+								name="(recipes)"
+								options={{
 									animation: "fade",
-								}} />
-								<Stack.Screen name="index" />
-								<Stack.Screen
-									name="modal"
-									options={{
-										presentation: "modal",
-									}}
-								/>
-							</Stack>
-						)}
+								}}
+							/>
+							<Stack.Screen name="index" />
+							<Stack.Screen
+								name="modal"
+								options={{
+									presentation: "modal",
+								}}
+							/>
+						</Stack>
+					)}
 				</SafeAreaView>
 				<StatusBar style="auto" />
 			</SafeAreaProvider>

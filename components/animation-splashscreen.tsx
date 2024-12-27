@@ -20,7 +20,6 @@ export default function AnimationSplashscreen({ setShowAnimation, duration = 200
 
 	return (
 		<View className="flex-1 items-center justify-center">
-			<Link href="/">debug</Link>
 			<LottieView
 				ref={animationRef}
 				loop={true}

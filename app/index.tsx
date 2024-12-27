@@ -1,11 +1,12 @@
-import { Heading } from "@/components/ui/heading";
-import { Button, View } from "react-native";
 import fruitsAndVegetables from "@/utils/data/fruits_vegetables_months";
+import { ScrollView } from "react-native-gesture-handler";
+import { Heading } from "@/components/ui/heading";
 import { MONTHS } from "@/utils/data/months";
+import { Button, View } from "react-native";
+import { Link, router } from "expo-router";
 import Card from "@/components/ui/card";
 import { P } from "@/components/ui/p";
-import { Link, router } from "expo-router";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export default function Page() {
 	const currentMonthString = MONTHS[new Date().getMonth()];
@@ -14,7 +15,7 @@ export default function Page() {
 	const vegetableList = fruitsAndVegetables[currentMonthString].vegetables;
 
 	return (
-		<ScrollView className="flex-1" bounces={true} showsVerticalScrollIndicator={false}>
+		<ScrollView className="flex-1 p-4" bounces={true} showsVerticalScrollIndicator={false}>
 			<Heading level={2} className="pb-5">
 				Fruits & légumes de saison :
 			</Heading>

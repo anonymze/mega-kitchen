@@ -126,6 +126,7 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 				enableDynamicSizing={false}
 				snapPoints={snapPoints}
 				footerComponent={renderFooter}
+				containerStyle={styles.bottomSheetContainer}
 			>
 				<BottomSheetTextInput
 					placeholder={placeholderSearch}
@@ -134,8 +135,8 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 				/>
 
 				<BottomSheetScrollView style={styles.bottomSheetContent}>
-					<MemoizedSections 
-						sections={filteredSections} 
+					<MemoizedSections
+						sections={filteredSections}
 						selectedIds={selectedIds}
 						onItemPress={(item) => {
 							if (selectedIds.find((id) => id.id === item.id)) {
@@ -160,51 +161,53 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 	);
 }
 
-const MemoizedSections = React.memo(({ sections, selectedIds, onItemPress }: {
-	sections: Props['data'],
-	selectedIds: FoodItem[],
-	onItemPress: (item: FoodItem) => void
-}) => (
-	<>
-		{sections.map((section) => (
-			<View key={section.title} style={styles.bottomSheetListContent}>
-				<View style={styles.sectionHeaderContainer}>
-					<View style={styles.sectionHeader}>
-						<Text style={styles.sectionHeaderText}>{section.title}</Text>
+const MemoizedSections = React.memo(
+	({
+		sections,
+		selectedIds,
+		onItemPress,
+	}: {
+		sections: Props["data"];
+		selectedIds: FoodItem[];
+		onItemPress: (item: FoodItem) => void;
+	}) => (
+		<>
+			{sections.map((section) => (
+				<View key={section.title} style={styles.bottomSheetListContent}>
+					<View style={styles.sectionHeaderContainer}>
+						<View style={styles.sectionHeader}>
+							<Text style={styles.sectionHeaderText}>{section.title}</Text>
+						</View>
 					</View>
-				</View>
-				{section.data.map((item) => (
-					<Pressable
-						key={item.id}
-						style={[styles.itemContainer, selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground]}
-						onPress={() => onItemPress(item)}
-					>
-						<Image
-							style={styles.itemImage}
-							contentFit="contain"
-							source={item.image}
-							alt={item.label.FR}
-						/>
-						<Text
+					{section.data.map((item) => (
+						<Pressable
+							key={item.id}
 							style={[
-								styles.itemText,
-								selectedIds.find((id) => id.id === item.id) && styles.selectedItemText,
+								styles.itemContainer,
+								selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
 							]}
+							onPress={() => onItemPress(item)}
 						>
-							{item.label.FR}
-						</Text>
-					</Pressable>
-				))}
-			</View>
-		))}
-	</>
-), (prevProps, nextProps) => {
-	// optional: custom comparison function
-	return (
-		prevProps.sections === nextProps.sections &&
-		prevProps.selectedIds === nextProps.selectedIds
-	);
-});
+							<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
+							<Text
+								style={[
+									styles.itemText,
+									selectedIds.find((id) => id.id === item.id) && styles.selectedItemText,
+								]}
+							>
+								{item.label.FR}
+							</Text>
+						</Pressable>
+					))}
+				</View>
+			))}
+		</>
+	),
+	(prevProps, nextProps) => {
+		// optional: custom comparison function
+		return prevProps.sections === nextProps.sections && prevProps.selectedIds === nextProps.selectedIds;
+	}
+);
 
 // WE ARE DEALING WITH A CONSEQUENT LIST, SO WE USE STYLE SHEET CSS
 // INSTEAD OF TAILWIND FOR PERFORMANCE REASONS
@@ -260,8 +263,12 @@ const styles = StyleSheet.create({
 	// 	paddingRight: 10,
 	// 	paddingBottom: 100,
 	// },
+	bottomSheetContainer: {
+		marginHorizontal: 16,
+	},
 	bottomSheetContent: {
 		marginBottom: 40,
+		paddingEnd: 16,
 	},
 	bottomSheetListContent: {
 		marginBottom: 20,
