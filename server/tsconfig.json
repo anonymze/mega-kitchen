@@ -36,7 +36,8 @@
 		"lib": ["es2022"],
 
 		"types": [
-			"@edge-runtime/node-utils"
+			"@edge-runtime/node-utils",
+			"@edge-runtime/primitives"
 		]
 	},
 

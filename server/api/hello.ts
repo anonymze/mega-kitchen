@@ -9,7 +9,7 @@ export default function handler(
   response: VercelResponse,
 ) {
 	// setTimeout(() => {
-		console.log('hey')
+		// console.log('hey')
 	// }, 1000);
   return response.status(200).json({ text: 'I am an Edge Function!' });
 }
