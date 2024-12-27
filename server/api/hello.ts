@@ -1,8 +1,8 @@
+import { ipAddress } from '@vercel/functions';
 // if you need to delay the timeout, you can use this
 // import { waitUntil } from '@vercel/functions';
-
 import { getEnv } from '@vercel/functions';
-import { ipAddress } from '@vercel/functions';
+
 
 export const config = {
 	runtime: "edge",
@@ -16,7 +16,9 @@ export default async function handler(request: Request) {
 
   console.log(ip);
 	console.log(VERCEL_REGION);
+
 	
+
 	return new Response("Hello from Edge Function!", {
 		status: 200,
 		headers: {
