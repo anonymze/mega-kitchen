@@ -7,7 +7,7 @@ import { useChat } from '@ai-sdk/react';
 export default function Page() {
   const { messages, error, handleInputChange, input, handleSubmit } = useChat({
     fetch: expoFetch as unknown as typeof globalThis.fetch,
-    api: generateAPIUrl('/api/chat'),
+    api: generateAPIUrl('/api/hello'),
     onError: error => console.error(error, 'ERROR'),
   });
 
