@@ -54,43 +54,6 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 			.filter((section) => section.data.length > 0); // Remove empty sections
 	}, [searchQuery]);
 
-	// const renderSectionHeader = React.useCallback(
-	// 	({ section }: { section: (typeof data)[number] }) => (
-	// 		<View style={styles.sectionHeaderContainer}>
-	// 			<View style={styles.sectionHeader}>
-	// 				<Text style={styles.sectionHeaderText}>{section.title}</Text>
-	// 			</View>
-	// 		</View>
-	// 	),
-	// 	[]
-	// );
-
-	// const renderItem = React.useCallback(
-	// 	({ item }: { item: FoodItem }) => (
-	// 		<Pressable
-	// 			style={[
-	// 				styles.itemContainer,
-	// 				selectedIds.find((id) => id.id === item.id) && styles.selectedItemBackground,
-	// 			]}
-	// 			onPress={() => {
-	// 				if (selectedIds.find((id) => id.id === item.id)) {
-	// 					setSelectedIds(selectedIds.filter((selected) => selected.id !== item.id));
-	// 				} else {
-	// 					setSelectedIds((prev) => [...prev, item]);
-	// 				}
-	// 			}}
-	// 		>
-	// 			<Image style={styles.itemImage} contentFit="contain" source={item.image} alt={item.label.FR} />
-	// 			<Text
-	// 				style={[styles.itemText, selectedIds.find((id) => id.id === item.id) && styles.selectedItemText]}
-	// 			>
-	// 				{item.label.FR}
-	// 			</Text>
-	// 		</Pressable>
-	// 	),
-	// 	[selectedIds]
-	// );
-
 	const renderFooter = React.useCallback(
 		(props: BottomSheetFooterProps) => (
 			<BottomSheetFooter {...props}>
@@ -148,15 +111,6 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 						}}
 					/>
 				</BottomSheetScrollView>
-
-				{/* <BottomSheetSectionList
-					maxToRenderPerBatch={1}			
-					sections={filteredSections}
-					renderItem={renderItem}
-					renderSectionHeader={renderSectionHeader}
-					contentContainerStyle={styles.bottomSheetContent}
-					keyExtractor={(item) => item.id}
-				/> */}
 			</BottomSheetModal>
 		</>
 	);
@@ -259,11 +213,6 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		backgroundColor: "rgba(151, 151, 151, 0.25)",
 	},
-	// bottomSheetContent: {
-	// 	backgroundColor: "white",
-	// 	paddingRight: 10,
-	// 	paddingBottom: 100,
-	// },
 	bottomSheetContainer: {
 		marginHorizontal: 10,
 	},
