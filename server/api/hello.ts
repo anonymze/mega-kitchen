@@ -23,7 +23,7 @@ export default async function handler(request: Request) {
     console.log(ip);
     console.log(process.env.OPENAI_API_KEY);
 
-    const result = await streamText({
+    const result = streamText({
       model: openai('gpt-4o'),
       prompt: "Hello, how are you?",
     });
