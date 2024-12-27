@@ -5,5 +5,6 @@ export const config = {
 }
 
 export function GET(request: Request) {
+	console.log(process.env.VERCEL_REGION);
   return new Response('Hello from Edge Function!')
 }
