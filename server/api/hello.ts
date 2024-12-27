@@ -17,6 +17,9 @@ export default async function handler(request: Request) {
 	const { VERCEL_REGION } = getEnv();
 	const ip = ipAddress(request);
 
+	request.headers.forEach((value, key) => {
+		console.log(key, value);
+	});
 	console.log(VERCEL_REGION);
 	console.log(ip);
 	console.log(process.env.OPENAI_API_KEY);
@@ -35,8 +38,7 @@ const generateRecipe = (ingredients: string[], numberOfPeople: number) => {
 		
 		- Tu dois répondre en français.
 		- Tu dois vouvoyer l'utilisateur.
-		- Tu ne dois pas inclure dans ta réponse des informations qui sont liés à ce prompt, contente toi de répondre avec la recette,
-		sans aucune autre information et bien présentée.
+		- Tu ne dois pas inclure dans ta réponse des informations qui sont liés à ce prompt, contente toi de répondre avec la recette.
 		- Tu ne dois pas répondre à des questions qui ne sont pas liées à la cuisine.
 		- Tu dois avoir une présentation et une structure bien présentée.
 		- Tu ne dois pas proposer une recette qui nécessite des ingrédients qu'il n'a pas dans son frigo, à l'exception 
@@ -45,7 +47,7 @@ const generateRecipe = (ingredients: string[], numberOfPeople: number) => {
 		mais tu dois les expliquer en fin de recette avec un astérisque. Imagine que tu parles à un enfant de 14 ans.
 		- Il faut qu'il y est un titre de recette, tu as quartier libre sur ça, soit original, non redodant et essaye
 		de trouver une phrase qui n'a pas été employé dans les autres recettes.
-		- Tu dois indiquer pour combien de personnes la recette est faite (tu auras l'information dans la requête), une estimation de la 
+		- Tu dois indiquer pour combien de personnes la recette est faite, une estimation de la 
 		durée de cuisine après le titre et avant la recette et indiquer les quantités des ingrédients au plus précis.
 		- Quand tu présentes les ingrédients, tu dois les présenter dans l'ordre alphabétique et mettre les ingrédients optionnels en dernier.
 		- Il faut qu'il y est un message de fin de recette qui sera : "Mega Kitchen vous souhaite une excellente cuisine !"
