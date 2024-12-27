@@ -18,6 +18,8 @@ export default async function handler(request: Request) {
   const { VERCEL_REGION } = getEnv();
   const ip = ipAddress(request);
 
+	console.log(VERCEL_REGION);
+	console.log(ip);
 	console.log(process.env.OPENAI_API_KEY);
 
 
