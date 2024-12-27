@@ -15,11 +15,13 @@ export const config = {
 };
 
 export default async function handler(request: Request) {
-  const { VERCEL_REGION } = getEnv();
+  const { VERCEL_REGION, OPENAI_API_KEY } = getEnv();
   const ip = ipAddress(request);
 
   console.log(ip);
 	console.log(VERCEL_REGION);
+	console.log(OPENAI_API_KEY);
+	console.log(process.env.OPENAI_API_KEY);
 
 
 	const result = streamText({
