@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@edge-runtime/primitives':
-        specifier: ^2.0.0
-        version: 2.1.2
+      '@vercel/node':
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -36,24 +36,40 @@ packages:
     resolution: {integrity: sha512-gPrS6AVw/qJJL0vcxMXv4kFXCU3ZTCD1uuJpwX15YxHV8BgU9OG5v9LrkkXcr96PBT/9epypfNJMhlWADuEziw==}
     engines: {node: '>=16'}
 
+  '@edge-runtime/format@2.2.1':
+    resolution: {integrity: sha512-JQTRVuiusQLNNLe2W9tnzBlV/GvSVcozLl4XZHk5swnRZ/v6jp8TqR8P7sqmJsQqblDZ3EztcWmLDbhRje/+8g==}
+    engines: {node: '>=16'}
+
   '@edge-runtime/node-utils@2.2.1':
     resolution: {integrity: sha512-RUl/439BHKshkhSGFRlZ1kzy68wL4mn8VNKDSZr3p0tciyZ33Mjfpl+vofqnHqXRmDI6nLnZpfJvhY3D88o0pA==}
+    engines: {node: '>=16'}
+
+  '@edge-runtime/node-utils@2.3.0':
+    resolution: {integrity: sha512-uUtx8BFoO1hNxtHjp3eqVPC/mWImGb2exOfGjMLUoipuWgjej+f4o/VP4bUI8U40gu7Teogd5VTeZUkGvJSPOQ==}
     engines: {node: '>=16'}
 
   '@edge-runtime/ponyfill@2.4.1':
     resolution: {integrity: sha512-ZbR/EViY3gg2rmEAQTKPa6mXl4aR1/+cFcQe4r1segCjEbTAxT6PWu40odbu/KlZKSysEb2O/BWIC2lJgSJOMQ==}
     engines: {node: '>=16'}
 
-  '@edge-runtime/primitives@2.1.2':
-    resolution: {integrity: sha512-SR04SMDybALlhIYIi0hiuEUwIl0b7Sn+RKwQkX6hydg4+AKMzBNDFhj2nqHDD1+xkHArV9EhmJIb6iGjShwSzg==}
-    engines: {node: '>=14'}
+  '@edge-runtime/ponyfill@2.4.2':
+    resolution: {integrity: sha512-oN17GjFr69chu6sDLvXxdhg0Qe8EZviGSuqzR9qOiKh4MhFYGdBBcqRNzdmYeAdeRzOW2mM9yil4RftUQ7sUOA==}
+    engines: {node: '>=16'}
 
   '@edge-runtime/primitives@4.0.5':
     resolution: {integrity: sha512-t7QiN5d/KpXgCvIfSt6Nm9Hj3WVdNgc5CpOD73jasY+9EvTI7Ngdj5cXvjcHrPcmYWJZMySPgeEeoL/1N/Llag==}
     engines: {node: '>=16'}
 
+  '@edge-runtime/primitives@4.1.0':
+    resolution: {integrity: sha512-Vw0lbJ2lvRUqc7/soqygUX216Xb8T3WBZ987oywz6aJqRxcwSVWwr9e+Nqo2m9bxobA9mdbWNNoRY6S9eko1EQ==}
+    engines: {node: '>=16'}
+
   '@edge-runtime/vm@3.1.7':
     resolution: {integrity: sha512-hUMFbDQ/nZN+1TLMi6iMO1QFz9RSV8yGG8S42WFPFma1d7VSNE0eMdJUmwjmtav22/iQkzHMmu6oTSfAvRGS8g==}
+    engines: {node: '>=16'}
+
+  '@edge-runtime/vm@3.2.0':
+    resolution: {integrity: sha512-0dEVyRLM/lG4gp1R/Ik5bfPl/1wX00xFwd5KcNH602tzBa09oF7pbTKETEhR1GjZ75K6OJnYFu8II2dyMhONMw==}
     engines: {node: '>=16'}
 
   '@fastify/busboy@2.1.1':
@@ -118,14 +134,23 @@ packages:
   '@types/node@14.18.33':
     resolution: {integrity: sha512-qelS/Ra6sacc4loe/3MSjXNL1dNQ/GjxNHVzuChwMfmk7HuycRLVQN2qNY3XahK+fZc5E2szqQSKUyAF0E+2bg==}
 
+  '@types/node@16.18.11':
+    resolution: {integrity: sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==}
+
   '@types/node@20.17.10':
     resolution: {integrity: sha512-/jrvh5h6NXhEauFFexRin69nA0uHJ5gwk4iDivp/DeoEua3uwCUto6PC86IpRITBOs4+6i2I56K5x5b6WYGXHA==}
 
   '@vercel/build-utils@7.3.0':
     resolution: {integrity: sha512-RJwqrGYSk75auHZqWmlSL+a5JsWv+4SF1AxNQJ+KpF3XWZ/8yThkN/jHBfNxMmW6VvNczSVtMaXI0/2Sess6Eg==}
 
+  '@vercel/build-utils@8.8.0':
+    resolution: {integrity: sha512-4jkeJ/Xr0epojgfiyQufB8vC0ubE9SCfA9I2BGcOIKcf65C25juSvuYwaLixnjZXHUTO4Y9W7fdgiLUk55MgbA==}
+
   '@vercel/error-utils@2.0.2':
     resolution: {integrity: sha512-Sj0LFafGpYr6pfCqrQ82X6ukRl5qpmVrHM/191kNYFqkkB9YkjlMAj6QcEsvCG259x4QZ7Tya++0AB85NDPbKQ==}
+
+  '@vercel/error-utils@2.0.3':
+    resolution: {integrity: sha512-CqC01WZxbLUxoiVdh9B/poPbNpY9U+tO1N9oWHwTl5YAZxcqXmmWJ8KNMFItJCUUWdY3J3xv8LvAuQv2KZ5YdQ==}
 
   '@vercel/fun@1.1.0':
     resolution: {integrity: sha512-SpuPAo+MlAYMtcMcC0plx7Tv4Mp7SQhJJj1iIENlOnABL24kxHpL09XLQMGzZIzIW7upR8c3edwgfpRtp+dhVw==}
@@ -151,8 +176,16 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
+  '@vercel/nft@0.27.3':
+    resolution: {integrity: sha512-oySTdDSzUAFDXpsSLk9Q943o+/Yu/+TCFxnehpFQEf/3khi2stMpTHPVNwFdvZq/Z4Ky93lE+MGHpXCRpMkSCA==}
+    engines: {node: '>=16'}
+    hasBin: true
+
   '@vercel/node@3.0.12':
     resolution: {integrity: sha512-OiNHiUe1LX/CfDrQ07ntPsoYhJiC38mEeErYeqA6YNVAz3QGdX3pthiaIig2KPqeeYkEx5bSkVIqQtQOTJBuLQ==}
+
+  '@vercel/node@5.0.0':
+    resolution: {integrity: sha512-l917aGyDkaOhqfDrYSqy9sjd+Pv6K8mCsVyxzGv4kwmbhERpi8rS6aBmfIf4fDevEPYiOasftPHASbdnyHOe/g==}
 
   '@vercel/python@4.1.0':
     resolution: {integrity: sha512-EIQXK5zL6fce0Barh74gc7xyLtRyvgmLZDIVQ8yJLtFxPlPCRY3GXkdJ7Jdcw8Pd0uuVF0vIHatv18xSLbcwtg==}
@@ -177,6 +210,11 @@ packages:
 
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
+
+  acorn-import-attributes@1.9.5:
+    resolution: {integrity: sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==}
+    peerDependencies:
+      acorn: ^8
 
   acorn-walk@8.3.4:
     resolution: {integrity: sha512-ueEepnujpqee2o5aIYnvHU6C0A42MNdsIDeqy5BydrkuC5R1ZuUFnm27EeFJGoEHJQgn3uleRvmTXaJgfXbt4g==}
@@ -271,6 +309,9 @@ packages:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
 
+  cjs-module-lexer@1.2.3:
+    resolution: {integrity: sha512-0TNiGstbQmCFwt4akjjBg5pLRTSyj/PkWQ1ZoO2zntmg9yLqSRxwEa4iCfQLGjqhiqBfOJa7W/E8wfGrTDmlZQ==}
+
   code-block-writer@10.1.1:
     resolution: {integrity: sha512-67ueh2IRGst/51p0n6FvPrnRjAGHY5F8xdjkgrYE7DDzpJe6qA07RYQ9VcoUeo5ATOjSOiWpSL3SWBRRbempMw==}
 
@@ -337,6 +378,11 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
+  edge-runtime@2.5.9:
+    resolution: {integrity: sha512-pk+k0oK0PVXdlT4oRp4lwh+unuKB7Ng4iZ2HB+EZ7QCEQizX360Rp/F4aRpgpRgdP2ufB35N+1KppHmYjqIGSg==}
+    engines: {node: '>=16'}
+    hasBin: true
+
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
 
@@ -345,6 +391,9 @@ packages:
 
   end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
+
+  es-module-lexer@1.4.1:
+    resolution: {integrity: sha512-cXLGjP0c4T3flZJKQSuziYoq7MlT+rnvfZjfp7h+I7K9BNX54kP9nyWvdbwjQ4u1iWbOL4u96fgeZLToQlZC7w==}
 
   esbuild-android-64@0.14.47:
     resolution: {integrity: sha512-R13Bd9+tqLVFndncMHssZrPWe6/0Kpv2/dt4aA69soX4PRxlzsVpCvoJeFE8sOEoeVEiBkI0myjlkDodXlHa0g==}
@@ -1003,6 +1052,10 @@ packages:
     resolution: {integrity: sha512-cSb4bPFd5qgR7qr2jYAi0hlX9n5YKK2ONKkLFkxl+v/9BvC0sOpZjBHDBSXc5lWAf5ty9oZdRXytBIHzgUcerw==}
     engines: {node: '>=14.0'}
 
+  undici@5.28.4:
+    resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
+    engines: {node: '>=14.0'}
+
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
@@ -1093,19 +1146,29 @@ snapshots:
 
   '@edge-runtime/format@2.2.0': {}
 
+  '@edge-runtime/format@2.2.1': {}
+
   '@edge-runtime/node-utils@2.2.1':
     dependencies:
       '@edge-runtime/cookies': 3.4.1
 
+  '@edge-runtime/node-utils@2.3.0': {}
+
   '@edge-runtime/ponyfill@2.4.1': {}
 
-  '@edge-runtime/primitives@2.1.2': {}
+  '@edge-runtime/ponyfill@2.4.2': {}
 
   '@edge-runtime/primitives@4.0.5': {}
+
+  '@edge-runtime/primitives@4.1.0': {}
 
   '@edge-runtime/vm@3.1.7':
     dependencies:
       '@edge-runtime/primitives': 4.0.5
+
+  '@edge-runtime/vm@3.2.0':
+    dependencies:
+      '@edge-runtime/primitives': 4.1.0
 
   '@fastify/busboy@2.1.1': {}
 
@@ -1173,13 +1236,19 @@ snapshots:
 
   '@types/node@14.18.33': {}
 
+  '@types/node@16.18.11': {}
+
   '@types/node@20.17.10':
     dependencies:
       undici-types: 6.19.8
 
   '@vercel/build-utils@7.3.0': {}
 
+  '@vercel/build-utils@8.8.0': {}
+
   '@vercel/error-utils@2.0.2': {}
+
+  '@vercel/error-utils@2.0.3': {}
 
   '@vercel/fun@1.1.0':
     dependencies:
@@ -1251,6 +1320,24 @@ snapshots:
       - encoding
       - supports-color
 
+  '@vercel/nft@0.27.3':
+    dependencies:
+      '@mapbox/node-pre-gyp': 1.0.11
+      '@rollup/pluginutils': 4.2.1
+      acorn: 8.14.0
+      acorn-import-attributes: 1.9.5(acorn@8.14.0)
+      async-sema: 3.1.1
+      bindings: 1.5.0
+      estree-walker: 2.0.2
+      glob: 7.2.3
+      graceful-fs: 4.2.11
+      micromatch: 4.0.8
+      node-gyp-build: 4.8.4
+      resolve-from: 5.0.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   '@vercel/node@3.0.12':
     dependencies:
       '@edge-runtime/node-utils': 2.2.1
@@ -1272,6 +1359,34 @@ snapshots:
       ts-node: 10.9.1(@types/node@14.18.33)(typescript@4.9.5)
       typescript: 4.9.5
       undici: 5.26.5
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - encoding
+      - supports-color
+
+  '@vercel/node@5.0.0':
+    dependencies:
+      '@edge-runtime/node-utils': 2.3.0
+      '@edge-runtime/primitives': 4.1.0
+      '@edge-runtime/vm': 3.2.0
+      '@types/node': 16.18.11
+      '@vercel/build-utils': 8.8.0
+      '@vercel/error-utils': 2.0.3
+      '@vercel/nft': 0.27.3
+      '@vercel/static-config': 3.0.0
+      async-listen: 3.0.0
+      cjs-module-lexer: 1.2.3
+      edge-runtime: 2.5.9
+      es-module-lexer: 1.4.1
+      esbuild: 0.14.47
+      etag: 1.8.1
+      node-fetch: 2.6.9
+      path-to-regexp: 6.2.1
+      ts-morph: 12.0.0
+      ts-node: 10.9.1(@types/node@16.18.11)(typescript@4.9.5)
+      typescript: 4.9.5
+      undici: 5.28.4
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -1320,6 +1435,10 @@ snapshots:
       ts-morph: 12.0.0
 
   abbrev@1.1.1: {}
+
+  acorn-import-attributes@1.9.5(acorn@8.14.0):
+    dependencies:
+      acorn: 8.14.0
 
   acorn-walk@8.3.4:
     dependencies:
@@ -1413,6 +1532,8 @@ snapshots:
 
   chownr@2.0.0: {}
 
+  cjs-module-lexer@1.2.3: {}
+
   code-block-writer@10.1.1: {}
 
   color-support@1.1.3: {}
@@ -1461,6 +1582,18 @@ snapshots:
       signal-exit: 4.0.2
       time-span: 4.0.0
 
+  edge-runtime@2.5.9:
+    dependencies:
+      '@edge-runtime/format': 2.2.1
+      '@edge-runtime/ponyfill': 2.4.2
+      '@edge-runtime/vm': 3.2.0
+      async-listen: 3.0.1
+      mri: 1.2.0
+      picocolors: 1.0.0
+      pretty-ms: 7.0.1
+      signal-exit: 4.0.2
+      time-span: 4.0.0
+
   emoji-regex@8.0.0: {}
 
   end-of-stream@1.1.0:
@@ -1470,6 +1603,8 @@ snapshots:
   end-of-stream@1.4.4:
     dependencies:
       once: 1.4.0
+
+  es-module-lexer@1.4.1: {}
 
   esbuild-android-64@0.14.47:
     optional: true
@@ -2036,6 +2171,24 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
+  ts-node@10.9.1(@types/node@16.18.11)(typescript@4.9.5):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.11
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 16.18.11
+      acorn: 8.14.0
+      acorn-walk: 8.3.4
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.9.5
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+
   ts-toolbelt@6.15.5: {}
 
   typescript@4.9.5: {}
@@ -2047,6 +2200,10 @@ snapshots:
   undici-types@6.19.8: {}
 
   undici@5.26.5:
+    dependencies:
+      '@fastify/busboy': 2.1.1
+
+  undici@5.28.4:
     dependencies:
       '@fastify/busboy': 2.1.1
 
