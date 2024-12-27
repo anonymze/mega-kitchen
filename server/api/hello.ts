@@ -1,7 +1,7 @@
-import { streamText, generateText } from 'ai';
 import { ipAddress } from '@vercel/functions';
 import { getEnv } from '@vercel/functions';
 import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 
 
 // if you need to delay the timeout, you can use this
@@ -22,14 +22,6 @@ export default async function handler(request: Request) {
     console.log(VERCEL_REGION);
     console.log(ip);
     console.log(process.env.OPENAI_API_KEY);
-
-		const { text } = await generateText({
-			model: openai('gpt-4o'),
-			system: 'You are a friendly assistant!',
-			prompt: 'Why is the sky blue?',
-		});
-		
-		console.log(text);
 
     const result = streamText({
       model: openai('gpt-4o'),
