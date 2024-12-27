@@ -6,5 +6,9 @@ export const config = {
 
 export function GET(request: Request) {
 	console.log(process.env.VERCEL_REGION);
-  return new Response('Hello from Edge Function!')
+  return new Response(JSON.stringify({
+		region: process.env.VERCEL_REGION,
+		runtime: process.env.EDGE_RUNTIME,
+		request: request.url
+	}))
 }
