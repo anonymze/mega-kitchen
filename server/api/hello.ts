@@ -5,5 +5,5 @@ export const config = {
 }
 
 export function GET(request: Request) {
-  console.log(process);
+  return new Response('Hello from Edge Function!')
 }
