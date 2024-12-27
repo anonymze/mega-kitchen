@@ -5,10 +5,5 @@ export const config = {
 }
 
 export function GET(request: Request) {
-  return new Response().json({
-    isEdge: "bonjour",
-    // region: process.env.VERCEL_REGION,
-    // runtime: process.env.EDGE_RUNTIME,
-		// request: request.url
-  });
+  return new Response();
 }
