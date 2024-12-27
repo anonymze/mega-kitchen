@@ -1,7 +1,7 @@
 import { ipAddress } from "@vercel/functions";
-import { generateText, streamText } from "ai";
 import { getEnv } from "@vercel/functions";
 import { openai } from "@ai-sdk/openai";
+import { streamText } from "ai";
 
 
 // if you need to delay the timeout, you can use this
@@ -21,13 +21,13 @@ export default async function handler(request: Request) {
 	console.log(ip);
 	console.log(process.env.OPENAI_API_KEY);
 
-	const result = await generateText({
+	return generateRecipe(["tomate", "oignon", "pâte", "artichaud"], 8).toDataStreamResponse();
+}
+
+const generateRecipe = (ingredients: string[], numberOfPeople: number) => {
+	return streamText({
 		model: openai("gpt-4o-mini"),
-		prompt: `
-		La recette sera pour 8 personnes.
-Voici les ingrédients que l'utilisateur a indiqués sous ce format [ingrédient1, ingrédient2, ingrédient3, ...] : 
-[tomate, oignon, pâte, artichaud]
-		`,
+		prompt: `La recette sera pour ${numberOfPeople} personne(s). Voici les ingrédients que l'utilisateur a indiqués sous ce format [ingrédient1, ingrédient2, ...] : ${ingredients}`,
 		system: `Tu es sur une application mobile de type cuisine. Un utilisateur cherche une recette avec le reste d'ingrédients
 qu'il lui reste dans son frigo, donc l'application lui propose de choisir et d'indiquer ses ingrédients restants.
 Avec les ingrédients que tu recevras tu devras lui proposer une recette, simple, efficace et originale si possible.
@@ -52,6 +52,4 @@ durée de cuisine après le titre et avant la recette et indiquer les quantités
 - Il faut qu'il y est un message de fin de recette qui sera : "Mega Kitchen vous souhaite une excellente cuisine !"
 `,
 	});
-
-	return Response.json(result);
-}
+};
