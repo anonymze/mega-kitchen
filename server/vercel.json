@@ -1,8 +1,7 @@
 {
   "functions": {
     "./api/**/*": {
-      "maxDuration": 5,
-			"runtime": "edge"
+      "maxDuration": 5
     }
   }
 }
