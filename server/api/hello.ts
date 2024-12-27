@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
  
 export const config = {
   runtime: 'edge',
-	maxDuration: 1,
+	duration: 2,
 };
  
 export default async function handler(
