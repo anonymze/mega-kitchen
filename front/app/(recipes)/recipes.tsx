@@ -1,59 +1,48 @@
-import { View, TextInput, ScrollView, Text, SafeAreaView } from 'react-native';
-import { generateAPIUrl } from '@/utils/helper';
-import { fetch as expoFetch } from 'expo/fetch';
-import { useChat } from '@ai-sdk/react';
+import AnimationSplashscreen from "@/components/animation-splashscreen";
+import { View, ScrollView, Text } from "react-native";
+import { Loader2Icon } from "lucide-react-native";
+import { fetch as expoFetch } from "expo/fetch";
+import TailwindConfig from "@/tailwind.config";
+import { useCompletion } from "@ai-sdk/react";
+import { Link } from "expo-router";
+import React from "react";
 
 
 export default function Page() {
-  const { messages, error, handleInputChange, input, handleSubmit } = useChat({
-    fetch: expoFetch as unknown as typeof globalThis.fetch,
-    api: generateAPIUrl('/api/hello'),
-    onError: error => console.error(error, 'ERROR'),
-    
-  });
+	const [showAnimation, setShowAnimation] = React.useState(true);
+	const { complete, completion, isLoading } = useCompletion({
+		fetch: expoFetch as unknown as typeof globalThis.fetch,
+		api: process.env.EXPO_PUBLIC_API_RECIPES_URL,
+		onError: (error) => console.error(error, "ERROR"),
+	});
 
-  if (error) return <Text>{error.message}</Text>;
+	React.useEffect(() => {
+		complete("Your predefined prompt here");
+	}, []);
 
-  console.log(messages);
-
-  return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          paddingHorizontal: 8,
-        }}
-      >
-          {messages.map(m => (
-            <View key={m.id} style={{ marginVertical: 8 }}>
-              <View>
-                <Text style={{ fontWeight: 700 }}>{m.role}</Text>
-                <Text>{m.content}</Text>
-              </View>
-            </View>
-          ))}
-
-        <View style={{ marginTop: 8 }}>
-          <TextInput
-            style={{ backgroundColor: 'white', padding: 8 }}
-            placeholder="Say something..."
-            value={input}
-            onChange={e =>
-              handleInputChange({
-                ...e,
-                target: {
-                  ...e.target,
-                  value: e.nativeEvent.text,
-                },
-              } as unknown as React.ChangeEvent<HTMLInputElement>)
-            }
-            onSubmitEditing={e => {
-              handleSubmit(e);
-              e.preventDefault();
-            }}
-            autoFocus={true}
-          />
-        </View>
-      </View>
-  );
+	return (
+		<>
+			{showAnimation ? (
+				<AnimationSplashscreen setShowAnimation={setShowAnimation} />
+			) : (
+				<View className="flex-1 p-4">
+					<Link href="/frigo" className="mb-6">
+						<Text>Retrouver mon frigo</Text>
+					</Link>
+					<ScrollView className="flex-1">
+						<Text>{completion}</Text>
+					</ScrollView>
+					<View className="absolute bottom-10 w-full">
+						{isLoading && (
+							<Loader2Icon
+								className="mx-auto animate-spin"
+								color={TailwindConfig.theme.colors.primary}
+								size={45}
+							/>
+						)}
+					</View>
+				</View>
+			)}
+		</>
+	);
 }

@@ -5,10 +5,20 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import AnimationSplashscreen from "@/components/animation-splashscreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as SplashScreen from "expo-splash-screen";
+import { Loader2Icon } from "lucide-react-native";
 import { StatusBar } from "expo-status-bar";
+import { cssInterop } from "nativewind";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import React from "react";
+
+
+// as early as possible
+cssInterop(Loader2Icon, {
+	className: {
+		target: "style", // map className->style
+	},
+});
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.

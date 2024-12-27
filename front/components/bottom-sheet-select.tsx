@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	sectionHeader: {
-		// @ts-ignore
 		backgroundColor: TailwindConfig.theme.colors.primary,
 		borderRadius: 8,
 		paddingHorizontal: 12,
@@ -197,7 +196,6 @@ const styles = StyleSheet.create({
 		height: 30,
 	},
 	selectedItemBackground: {
-		// @ts-ignore
 		backgroundColor: TailwindConfig.theme.colors.primary + "AA",
 	},
 	selectedItemText: {
