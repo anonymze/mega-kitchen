@@ -5,5 +5,5 @@ export const config = {
 }
 
 export function GET(request: Request) {
-  return new Response();
+  console.log(process);
 }
