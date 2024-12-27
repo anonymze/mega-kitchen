@@ -66,7 +66,7 @@ export default function Page() {
 								color="red"
 								title="Chercher une recette"
 								onPress={() => {
-									router.push("/(recipes)/recipes");
+									router.push("/(recipe)/recipe");
 								}}
 							/>
 						) : (

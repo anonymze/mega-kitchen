@@ -20,7 +20,6 @@ const config = {
 			dark: "#000000",
 		},
 	},
-	plugins: [],
 } satisfies Config;
 
 export default config;

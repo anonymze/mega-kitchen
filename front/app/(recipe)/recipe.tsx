@@ -1,4 +1,5 @@
 import AnimationSplashscreen from "@/components/animation-splashscreen";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import { View, ScrollView, Text } from "react-native";
 import { Loader2Icon } from "lucide-react-native";
 import { fetch as expoFetch } from "expo/fetch";
@@ -12,7 +13,7 @@ export default function Page() {
 	const [showAnimation, setShowAnimation] = React.useState(true);
 	const { complete, completion, isLoading } = useCompletion({
 		fetch: expoFetch as unknown as typeof globalThis.fetch,
-		api: process.env.EXPO_PUBLIC_API_RECIPES_URL,
+		api: process.env.EXPO_PUBLIC_API_RECIPE_URL,
 		onError: (error) => console.error(error, "ERROR"),
 	});
 
@@ -34,11 +35,15 @@ export default function Page() {
 					</ScrollView>
 					<View className="absolute bottom-10 w-full">
 						{isLoading && (
-							<Loader2Icon
-								className="mx-auto animate-spin"
-								color={TailwindConfig.theme.colors.primary}
-								size={45}
-							/>
+							<Animated.View entering={FadeInDown.duration(300).springify()}>
+								<Loader2Icon
+									color={TailwindConfig.theme.colors.primary}
+									style={{
+										marginHorizontal: "auto",
+									}}
+									size={45}
+								/>
+							</Animated.View>
 						)}
 					</View>
 				</View>
