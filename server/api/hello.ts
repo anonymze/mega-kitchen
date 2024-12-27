@@ -1,4 +1,4 @@
-import { Request, Response } from '@edge-runtime/primitives'
+// import { Request, Response } from '@edge-runtime/primitives'
 
 export const config = {
   runtime: 'edge',
