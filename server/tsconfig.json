@@ -34,11 +34,6 @@
 
 		/* if your code doesn't run in the DOM: */
 		"lib": ["es2022"],
-
-		// "types": [
-		// 	"@edge-runtime/node-utils",
-		// 	"@edge-runtime/primitives"
-		// ]
 	},
 
 	/* where all files ts to CHECK are located */
