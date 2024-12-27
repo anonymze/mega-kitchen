@@ -15,20 +15,33 @@ export const config = {
 };
 
 export default async function handler(request: Request) {
-  const { VERCEL_REGION } = getEnv();
-  const ip = ipAddress(request);
+  try {
+    const { VERCEL_REGION } = getEnv();
+    const ip = ipAddress(request);
 
-	console.log(VERCEL_REGION);
-	console.log(ip);
-	console.log(process.env.OPENAI_API_KEY);
+    console.log(VERCEL_REGION);
+    console.log(ip);
+    console.log(process.env.OPENAI_API_KEY);
 
+    const result = await streamText({
+      model: openai('gpt-4o'),
+      prompt: "Hello, how are you?",
+    });
 
-	const result = streamText({
-    model: openai('gpt-4o'),
-    prompt: "Hello, how are you?",
-  });
+    console.log(result);
+    return result.toDataStreamResponse();
 
-	console.log(result);
-
-  return result.toDataStreamResponse();
+  } catch (error) {
+    console.error('Error:', error);
+    
+    // Return a proper error response
+    return new Response(JSON.stringify({
+      error: error instanceof Error ? error.message : 'An unknown error occurred'
+    }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
 }
