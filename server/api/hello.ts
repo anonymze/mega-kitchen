@@ -22,6 +22,7 @@ export default async function handler(request: Request) {
 	console.log(VERCEL_REGION);
 	console.log(OPENAI_API_KEY);
 	console.log(process.env.OPENAI_API_KEY);
+	console.log(process.env.TESTOUILLE);
 
 
 	const result = streamText({
