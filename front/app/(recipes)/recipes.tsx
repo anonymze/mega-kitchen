@@ -9,6 +9,7 @@ export default function Page() {
     fetch: expoFetch as unknown as typeof globalThis.fetch,
     api: generateAPIUrl('/api/hello'),
     onError: error => console.error(error, 'ERROR'),
+    
   });
 
   if (error) return <Text>{error.message}</Text>;
