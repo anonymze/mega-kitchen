@@ -2,14 +2,16 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
  
 export const config = {
   runtime: 'edge',
-	duration: 5,
-	maxDuration: 5,
+	// not working on edge function (initial response 25 seconds)
+	// maxDuration: 5,
 };
  
 export default async function handler(
+	ok: any
   // request: VercelRequest,
   // response: VercelResponse,
 ) {
+	console.dir(ok, { depth: null })
 	await new Promise(resolve => setTimeout(resolve, 40000));
 	console.log(process.env.VERCEL_REGION);
   return new Response('Hello from Edge Function!');
