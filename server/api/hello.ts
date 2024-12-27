@@ -22,7 +22,7 @@ export default async function handler(request: Request) {
 	console.log(process.env.OPENAI_API_KEY);
 
 	const syncResult = await generateText({
-		model: openai("gpt-4o"),
+		model: openai("gpt-4o-mini"),
 		prompt: "Hello, how are you?",
 	});
 
