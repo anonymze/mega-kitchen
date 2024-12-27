@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/**/*.ts": {
+    "api/hello.ts": {
       "maxDuration": 5 
     }
   }
