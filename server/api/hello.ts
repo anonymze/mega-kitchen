@@ -5,8 +5,8 @@ export const config = {
 };
  
 export default function handler(
-  request: VercelRequest,
-  response: VercelResponse,
+  // request: VercelRequest,
+  // response: VercelResponse,
 ) {
-  return response.status(200).json({ text: 'I am an Edge Function!' });
+  return new Response('Hello from Edge Function!');
 }
