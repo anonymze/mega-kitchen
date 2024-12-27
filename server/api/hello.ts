@@ -11,7 +11,8 @@ export default async function handler(
   // request: VercelRequest,
   // response: VercelResponse,
 ) {
-	console.dir(ok, { depth: null })
+	console.log('ok')
+	console.dir(ok)
 	console.log(process.env.VERCEL_REGION);
   return new Response('Hello from Edge Function!');
 	
