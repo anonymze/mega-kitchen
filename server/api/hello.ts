@@ -28,5 +28,7 @@ export default async function handler(request: Request) {
     prompt: "Hello, how are you?",
   });
 
+	console.log(result);
+
   return result.toDataStreamResponse();
 }
