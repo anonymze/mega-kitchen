@@ -103,7 +103,6 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 						}}
 					/>
 					<Button
-					
 						title="Ajouter"
 						onPress={() => {
 							onSelect(selectedIds);
@@ -136,7 +135,8 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 				/>
 
 				<BottomSheetSectionList
-					maxToRenderPerBatch={1}			
+					windowSize={1}
+					// maxToRenderPerBatch={1}
 					sections={filteredSections}
 					renderItem={renderItem}
 					renderSectionHeader={renderSectionHeader}
