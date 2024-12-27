@@ -12,7 +12,6 @@ export default async function handler(
   // response: VercelResponse,
 ) {
 	console.dir(ok, { depth: null })
-	await new Promise(resolve => setTimeout(resolve, 40000));
 	console.log(process.env.VERCEL_REGION);
   return new Response('Hello from Edge Function!');
 	
