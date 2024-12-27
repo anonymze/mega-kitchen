@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@vercel/edge':
-        specifier: ^1.1.1
-        version: 1.1.4
+      '@edge-runtime/primitives':
+        specifier: ^2.0.0
+        version: 2.1.2
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -43,6 +43,10 @@ packages:
   '@edge-runtime/ponyfill@2.4.1':
     resolution: {integrity: sha512-ZbR/EViY3gg2rmEAQTKPa6mXl4aR1/+cFcQe4r1segCjEbTAxT6PWu40odbu/KlZKSysEb2O/BWIC2lJgSJOMQ==}
     engines: {node: '>=16'}
+
+  '@edge-runtime/primitives@2.1.2':
+    resolution: {integrity: sha512-SR04SMDybALlhIYIi0hiuEUwIl0b7Sn+RKwQkX6hydg4+AKMzBNDFhj2nqHDD1+xkHArV9EhmJIb6iGjShwSzg==}
+    engines: {node: '>=14'}
 
   '@edge-runtime/primitives@4.0.5':
     resolution: {integrity: sha512-t7QiN5d/KpXgCvIfSt6Nm9Hj3WVdNgc5CpOD73jasY+9EvTI7Ngdj5cXvjcHrPcmYWJZMySPgeEeoL/1N/Llag==}
@@ -119,9 +123,6 @@ packages:
 
   '@vercel/build-utils@7.3.0':
     resolution: {integrity: sha512-RJwqrGYSk75auHZqWmlSL+a5JsWv+4SF1AxNQJ+KpF3XWZ/8yThkN/jHBfNxMmW6VvNczSVtMaXI0/2Sess6Eg==}
-
-  '@vercel/edge@1.1.4':
-    resolution: {integrity: sha512-mCe+KKmYphgWaO6NSxzkxskv4eZOuuRDqBQX/LhOizj5o1+4u/fwjN+WZDpAyVH8WU8+7EueijoT6wbTKlauOA==}
 
   '@vercel/error-utils@2.0.2':
     resolution: {integrity: sha512-Sj0LFafGpYr6pfCqrQ82X6ukRl5qpmVrHM/191kNYFqkkB9YkjlMAj6QcEsvCG259x4QZ7Tya++0AB85NDPbKQ==}
@@ -1098,6 +1099,8 @@ snapshots:
 
   '@edge-runtime/ponyfill@2.4.1': {}
 
+  '@edge-runtime/primitives@2.1.2': {}
+
   '@edge-runtime/primitives@4.0.5': {}
 
   '@edge-runtime/vm@3.1.7':
@@ -1175,8 +1178,6 @@ snapshots:
       undici-types: 6.19.8
 
   '@vercel/build-utils@7.3.0': {}
-
-  '@vercel/edge@1.1.4': {}
 
   '@vercel/error-utils@2.0.2': {}
 

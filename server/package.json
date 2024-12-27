@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vercel dev",
-    "deploy": "vercel deploy"
+    "vercel:dev": "vercel dev",
+    "vercel:deploy": "vercel deploy"
   },
   "dependencies": {
     "@edge-runtime/primitives": "^2.0.0"
