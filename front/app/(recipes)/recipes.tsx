@@ -14,16 +14,16 @@ export default function Page() {
 
   if (error) return <Text>{error.message}</Text>;
 
+  console.log(messages);
+
   return (
       <View
         style={{
-          height: '95%',
-          display: 'flex',
+          flex: 1,
           flexDirection: 'column',
           paddingHorizontal: 8,
         }}
       >
-        <ScrollView style={{ flex: 1 }}>
           {messages.map(m => (
             <View key={m.id} style={{ marginVertical: 8 }}>
               <View>
@@ -32,7 +32,6 @@ export default function Page() {
               </View>
             </View>
           ))}
-        </ScrollView>
 
         <View style={{ marginTop: 8 }}>
           <TextInput
