@@ -32,6 +32,7 @@ export default async function handler(request: Request) {
 		model: openai("gpt-4o"),
 		prompt: "Hello, how are you?",
 	});
+	
 
 	return result.toDataStreamResponse();
 }
