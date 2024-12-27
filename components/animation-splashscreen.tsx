@@ -1,5 +1,5 @@
+import { Platform, View } from "react-native";
 import LottieView from "lottie-react-native";
-import { View } from "react-native";
 import { Link } from "expo-router";
 import React from "react";
 
@@ -14,7 +14,11 @@ export default function AnimationSplashscreen({ setShowAnimation, duration = 200
 
 	React.useEffect(() => {
 		setTimeout(() => {
-			animationRef.current?.resume();
+			if (Platform.OS === "android") {
+				animationRef.current?.reset();
+			} else {
+				animationRef.current?.resume();
+			}
 		}, duration);
 	}, []);
 

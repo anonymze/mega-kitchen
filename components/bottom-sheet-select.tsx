@@ -103,6 +103,7 @@ export default function BottomSheetSelect({ onSelect, titleModal, placeholderSea
 						}}
 					/>
 					<Button
+					
 						title="Ajouter"
 						onPress={() => {
 							onSelect(selectedIds);
@@ -264,7 +265,7 @@ const styles = StyleSheet.create({
 	// 	paddingBottom: 100,
 	// },
 	bottomSheetContainer: {
-		marginHorizontal: 16,
+		marginHorizontal: 10,
 	},
 	bottomSheetContent: {
 		marginBottom: 40,
