@@ -29,10 +29,10 @@ export default async function handler(request: Request) {
 	console.log(syncResult);
 
 	const result = streamText({
-		model: openai("gpt-4o"),
+		model: openai("gpt-4o-mini"),
 		prompt: "Hello, how are you?",
 	});
-	
+
 
 	return result.toDataStreamResponse();
 }
