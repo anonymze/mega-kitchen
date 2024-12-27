@@ -1,5 +1,7 @@
 import { ipAddress } from '@vercel/functions';
 import { getEnv } from '@vercel/functions';
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 
 
 // if you need to delay the timeout, you can use this
@@ -19,12 +21,11 @@ export default async function handler(request: Request) {
   console.log(ip);
 	console.log(VERCEL_REGION);
 
-	
 
-	return new Response("Hello from Edge Function!", {
-		status: 200,
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+	const result = streamText({
+    model: openai('gpt-4o'),
+    prompt: "Hello, how are you?",
+  });
+
+  return result.toDataStreamResponse();
 }
