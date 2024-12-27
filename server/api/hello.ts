@@ -10,4 +10,5 @@ export default function handler(
 ) {
 	console.log(process.env.VERCEL_REGION);
   return new Response('Hello from Edge Function!');
+	
 }
