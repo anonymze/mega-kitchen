@@ -1,34 +1,4 @@
-import { ipAddress } from "@vercel/functions";
-import { generateText, streamText } from "ai";
-import { getEnv } from "@vercel/functions";
-import { openai } from "@ai-sdk/openai";
-
-
-// if you need to delay the timeout, you can use this
-// import { waitUntil } from '@vercel/functions';
-
-export const config = {
-	runtime: "edge",
-	// not working on edge function (initial response 25 seconds)
-	// maxDuration: 5,
-};
-
-export default async function handler(request: Request) {
-	const { VERCEL_REGION } = getEnv();
-	const ip = ipAddress(request);
-
-	console.log(VERCEL_REGION);
-	console.log(ip);
-	console.log(process.env.OPENAI_API_KEY);
-
-	const result = await generateText({
-		model: openai("gpt-4o-mini"),
-		prompt: `
-		La recette sera pour 8 personnes.
-Voici les ingrédients que l'utilisateur a indiqués sous ce format [ingrédient1, ingrédient2, ingrédient3, ...] : 
-[tomate, oignon, pâte, artichaud]
-		`,
-		system: `Tu es sur une application mobile de type cuisine. Un utilisateur cherche une recette avec le reste d'ingrédients
+Tu es sur une application mobile de type cuisine. Un utilisateur cherche une recette avec le reste d'ingrédients
 qu'il lui reste dans son frigo, donc l'application lui propose de choisir et d'indiquer ses ingrédients restants.
 Avec les ingrédients que tu recevras tu devras lui proposer une recette, simple, efficace et originale si possible.
 
@@ -50,8 +20,8 @@ de trouver une phrase qui n'a pas été employé dans les autres recettes.
 durée de cuisine après le titre et avant la recette et indiquer les quantités des ingrédients au plus précis.
 - Quand tu présentes les ingrédients, tu dois les présenter dans l'ordre alphabétique et mettre les ingrédients optionnels en dernier.
 - Il faut qu'il y est un message de fin de recette qui sera : "Mega Kitchen vous souhaite une excellente cuisine !"
-`,
-	});
 
-	return Response.json(result);
-}
+La recette sera pour 8 personnes.
+Voici les ingrédients que l'utilisateur a indiqués sous ce format [ingrédient1, ingrédient2, ingrédient3, ...] : 
+
+
