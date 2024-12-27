@@ -6,6 +6,7 @@ export function GET(request: Request) {
   return new Response(JSON.stringify({
     isEdge: process.env.EDGE_RUNTIME === 'edge',
     region: process.env.VERCEL_REGION,
-    runtime: process.env.EDGE_RUNTIME  // Should now show 'edge'
+    runtime: process.env.EDGE_RUNTIME,
+		request: request.url
   }));
 }
