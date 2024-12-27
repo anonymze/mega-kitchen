@@ -11,6 +11,8 @@
     "@vercel/node": "^5.0.0"
   },
   "devDependencies": {
+    "@edge-runtime/node-utils": "^4.0.0",
+    "@edge-runtime/primitives": "^6.0.0",
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0",
     "vercel": "^32.3.0"
