@@ -29,6 +29,7 @@ export default function Loader({ fadeIn }: Props) {
 			)}
 		>
 			<Animated.View
+				className="bg-light rounded-full p-1"
 				entering={
 					fadeIn === "top" ? FadeInUp.duration(300).springify() : FadeInDown.duration(300).springify()
 				}

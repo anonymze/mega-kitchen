@@ -9,15 +9,15 @@ import React from "react";
 
 export default function Page() {
 	const [showAnimation, setShowAnimation] = React.useState(true);
-	const { complete, completion, isLoading } = useCompletion({
-		fetch: expoFetch as unknown as typeof globalThis.fetch,
-		api: process.env.EXPO_PUBLIC_API_RECIPE_URL,
-		onError: (error) => console.error(error, "ERROR"),
-	});
+	// const { complete, completion, isLoading } = useCompletion({
+	// 	fetch: expoFetch as unknown as typeof globalThis.fetch,
+	// 	api: process.env.EXPO_PUBLIC_API_RECIPE_URL,
+	// 	onError: (error) => console.error(error, "ERROR"),
+	// });
 
-	React.useEffect(() => {
-		complete("Your predefined prompt here");
-	}, []);
+	// React.useEffect(() => {
+	// 	complete("Your predefined prompt here");
+	// }, []);
 	
 
 	return (
@@ -30,9 +30,9 @@ export default function Page() {
 						<Text>Retrouver mon frigo</Text>
 					</Link>
 					<ScrollView className="flex-1">
-						<Text>{completion}</Text>
+						{/* <Text>{completion}</Text> */}
 					</ScrollView>
-					{isLoading && <Loader fadeIn="bottom" />}
+					{true && <Loader fadeIn="bottom" />}
 				</View>
 			)}
 		</>
