@@ -29,9 +29,9 @@ export default function Page() {
 						<Text>Retrouver mon frigo</Text>
 					</Link>
 					<ScrollView className="flex-1">
-						{/* <Text>{completion}</Text> */}
+						<Text>{completion}</Text>
 					</ScrollView>
-					{/* {isLoading && <Loader />} */}
+					{isLoading && <Loader />}
 					<Loader />
 				</View>
 			)}
