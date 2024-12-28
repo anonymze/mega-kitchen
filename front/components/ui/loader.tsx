@@ -38,6 +38,7 @@ export default function Loader({ fadeIn }: Props) {
 					<Loader2Icon color={TailwindConfig.theme.colors.primary} size={45} />
 				</Animated.View>
 			</Animated.View>
+			
 		</View>
 	);
 }
