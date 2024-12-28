@@ -47,7 +47,7 @@ export default function RootLayout() {
 						>
 							<Stack.Screen name="frigo" />
 							<Stack.Screen
-								name="(recipe)"
+								name="(recipe)/recipe"
 								options={{
 									animation: "fade",
 								}}

@@ -1,4 +1,4 @@
-import Animated, { clamp, ReduceMotion, useSharedValue, withDelay, withSpring, } from "react-native-reanimated";
+import Animated, { clamp, ReduceMotion, useAnimatedStyle, useSharedValue, withDelay, withSpring, } from "react-native-reanimated";
 import fruits_vegetables_months from "@/utils/data/fruits_vegetables_months";
 import { useLocalSearchParams } from "expo-router/build/hooks";
 import { Heading } from "@/components/ui/heading";
@@ -21,7 +21,6 @@ type Product =
 			type?: "vegetable";
 	  };
 
-// MANGUE
 const MAX_KGS_CO2 = 15;
 
 export default function Modal() {
@@ -49,15 +48,13 @@ export default function Modal() {
 		.map(([month]) => month);
 
 	// it does not re render the component
-	width.set(
-		withDelay(
-			250,
-			withSpring(`${percentage}%` as `${number}%`, {
-				duration,
-				dampingRatio,
-				reduceMotion: ReduceMotion.System,
-			})
-		)
+	width.value = withDelay(
+		250,
+		withSpring(`${percentage}%` as `${number}%`, {
+			duration,
+			dampingRatio,
+			reduceMotion: ReduceMotion.System,
+		})
 	);
 
 	return (

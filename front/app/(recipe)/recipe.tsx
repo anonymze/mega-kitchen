@@ -1,10 +1,8 @@
 import AnimationSplashscreen from "@/components/animation-splashscreen";
-import Animated, { FadeInDown } from "react-native-reanimated";
 import { View, ScrollView, Text } from "react-native";
-import { Loader2Icon } from "lucide-react-native";
 import { fetch as expoFetch } from "expo/fetch";
-import TailwindConfig from "@/tailwind.config";
 import { useCompletion } from "@ai-sdk/react";
+import Loader from "@/components/ui/loader";
 import { Link } from "expo-router";
 import React from "react";
 
@@ -31,21 +29,10 @@ export default function Page() {
 						<Text>Retrouver mon frigo</Text>
 					</Link>
 					<ScrollView className="flex-1">
-						<Text>{completion}</Text>
+						{/* <Text>{completion}</Text> */}
 					</ScrollView>
-					{isLoading && (
-						<View className="absolute bottom-10 w-full">
-							<Animated.View entering={FadeInDown.duration(300).springify()}>
-								<Loader2Icon
-									color={TailwindConfig.theme.colors.primary}
-									style={{
-										marginHorizontal: "auto",
-									}}
-									size={45}
-								/>
-							</Animated.View>
-						</View>
-					)}
+					{/* {isLoading && <Loader />} */}
+					<Loader />
 				</View>
 			)}
 		</>
