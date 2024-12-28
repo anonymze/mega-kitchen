@@ -18,6 +18,7 @@ export default function Page() {
 	React.useEffect(() => {
 		complete("Your predefined prompt here");
 	}, []);
+	
 
 	return (
 		<>
@@ -32,7 +33,6 @@ export default function Page() {
 						<Text>{completion}</Text>
 					</ScrollView>
 					{isLoading && <Loader />}
-					<Loader />
 				</View>
 			)}
 		</>
