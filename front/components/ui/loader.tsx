@@ -7,10 +7,10 @@ import React from "react";
 
 
 interface Props {
-	fadeIn?: "top" | "bottom";
+	fadeIn: "top" | "bottom";
 }
 
-export default function Loader({ fadeIn = "bottom" }: Props) {
+export default function Loader({ fadeIn }: Props) {
 	const rotation = useSharedValue<number>(0);
 
 	React.useEffect(() => {
@@ -20,12 +20,14 @@ export default function Loader({ fadeIn = "bottom" }: Props) {
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ rotate: `${rotation.value * 360}deg` }],
 	}));
-	
+
 	return (
-		<View className={cn(
-			"absolute left-0 right-0 flex-1 items-center",
-			fadeIn === "bottom" ? "bottom-10" : "top-10",
-		)}>
+		<View
+			className={cn(
+				"absolute left-0 right-0 flex-1 items-center",
+				fadeIn === "bottom" ? "bottom-10" : "top-10"
+			)}
+		>
 			<Animated.View
 				entering={
 					fadeIn === "top" ? FadeInUp.duration(300).springify() : FadeInDown.duration(300).springify()

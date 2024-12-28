@@ -32,7 +32,7 @@ export default function Page() {
 					<ScrollView className="flex-1">
 						<Text>{completion}</Text>
 					</ScrollView>
-					{isLoading && <Loader />}
+					{isLoading && <Loader fadeIn="bottom" />}
 				</View>
 			)}
 		</>
