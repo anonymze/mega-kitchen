@@ -29,7 +29,7 @@ export default function Loader({ fadeIn }: Props) {
 			)}
 		>
 			<Animated.View
-				className="rounded-full p-1"
+				className="bg-light rounded-full p-1"
 				entering={
 					fadeIn === "top" ? FadeInUp.duration(300).springify() : FadeInDown.duration(300).springify()
 				}
@@ -38,7 +38,6 @@ export default function Loader({ fadeIn }: Props) {
 					<Loader2Icon color={TailwindConfig.theme.colors.primary} size={45} />
 				</Animated.View>
 			</Animated.View>
-
 		</View>
 	);
 }

@@ -1,6 +1,5 @@
 import { Platform, View } from "react-native";
 import LottieView from "lottie-react-native";
-import { Link } from "expo-router";
 import React from "react";
 
 

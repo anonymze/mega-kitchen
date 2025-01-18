@@ -1,0 +1,49 @@
+module.exports = () => ({
+	expo: {
+		name: "mega-kitchen",
+		slug: "mega-kitchen",
+		version: "1.0.0",
+		orientation: "portrait",
+		icon: "./assets/images/icon.png",
+		scheme: "myapp",
+		userInterfaceStyle: "automatic",
+		newArchEnabled: true,
+		backgroundColor: "#ffffff",
+		ios: {
+			supportsTablet: true,
+			bundleIdentifier: "com.anonymous.mega-kitchen",
+		},
+		android: {
+			adaptiveIcon: {
+				foregroundImage: "./assets/images/adaptive-icon.png",
+				backgroundColor: "#ffffff",
+			},
+			package: "com.anonymous.megakitchen",
+		},
+		web: {
+			bundler: "metro",
+			output: "static",
+			favicon: "./assets/images/favicon.png",
+		},
+		plugins: [
+			[
+				"expo-router",
+				{
+					origin: process.env.NODE_ENV === "development" ? "http://localhost:8081" : "https://mega-kitchen.vercel.app",
+				},
+			],
+			[
+				"expo-splash-screen",
+				{
+					image: "./assets/images/splash-icon.png",
+					imageWidth: 200,
+					resizeMode: "contain",
+					backgroundColor: "#ffffff",
+				},
+			],
+		],
+		experiments: {
+			typedRoutes: true,
+		},
+	},
+});
