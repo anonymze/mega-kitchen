@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"vercel:dev": "vercel dev",
-		"vercel:deploy": "vercel deploy"
+		"vercel:deploy": "vercel deploy",
+		"vercel:deploy:prod": "vercel deploy --prod"
 	},
 	"dependencies": {
 		"@ai-sdk/openai": "^1.0.11",
