@@ -33,7 +33,6 @@ export default function Page() {
 	return (
 		<BottomSheetModalProvider>
 			<View className="flex-1 p-4">
-				<Link href="/">Retour</Link>
 				<Heading level={1}>Composer avec mon Frigo</Heading>
 
 				<BottomSheetSelect

@@ -42,7 +42,10 @@ export default function RootLayout() {
 						<Stack
 							screenOptions={{
 								contentStyle: { backgroundColor: "#ffffff" },
-								headerShown: false,
+								headerShown: true,
+								headerBackVisible: true,
+								headerBackButtonDisplayMode: "minimal",
+								headerTitle: "Mega Kitchen",
 							}}
 						>
 							<Stack.Screen name="frigo" />

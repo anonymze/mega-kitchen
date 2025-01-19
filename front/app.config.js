@@ -16,7 +16,7 @@ module.exports = () => ({
 		android: {
 			adaptiveIcon: {
 				foregroundImage: "./assets/images/adaptive-icon.png",
-				backgroundColor: "#ffffff",
+				backgroundColor: "#0D4845",
 			},
 			package: "com.anonymous.megakitchen",
 		},
@@ -35,9 +35,9 @@ module.exports = () => ({
 			[
 				"expo-splash-screen",
 				{
-					image: "./assets/images/splash-icon.png",
-					imageWidth: 200,
+					image: "./assets/images/splash.png",
 					resizeMode: "contain",
+					imageWidth: 220,
 					backgroundColor: "#ffffff",
 				},
 			],

@@ -1,4 +1,4 @@
-import Animated, { Easing, FadeInDown, FadeInUp, useAnimatedStyle, useSharedValue, withRepeat, withTiming, } from "react-native-reanimated";
+import Animated, { Easing, FadeInDown, FadeInUp, FadeOutDown, FadeOutUp, useAnimatedStyle, useSharedValue, withRepeat, withTiming, } from "react-native-reanimated";
 import { Loader2Icon } from "lucide-react-native";
 import TailwindConfig from "@/tailwind.config";
 import { cn } from "@/utils/libs/tailwind";
@@ -32,6 +32,9 @@ export default function Loader({ fadeIn }: Props) {
 				className="bg-light rounded-full p-1"
 				entering={
 					fadeIn === "top" ? FadeInUp.duration(300).springify() : FadeInDown.duration(300).springify()
+				}
+				exiting={
+					fadeIn === "top" ? FadeOutUp.duration(300).springify() : FadeOutDown.duration(300).springify()
 				}
 			>
 				<Animated.View style={animatedStyle}>

@@ -9,16 +9,15 @@ import React from "react";
 
 export default function Page() {
 	const [showAnimation, setShowAnimation] = React.useState(true);
-	// const { complete, completion, isLoading } = useCompletion({
-	// 	fetch: expoFetch as unknown as typeof globalThis.fetch,
-	// 	api: process.env.EXPO_PUBLIC_API_RECIPE_URL,
-	// 	onError: (error) => console.error(error, "ERROR"),
-	// });
+	const { complete, completion, isLoading } = useCompletion({
+		fetch: expoFetch as unknown as typeof globalThis.fetch,
+		api: process.env.EXPO_PUBLIC_API_RECIPE_URL,
+		onError: (error) => console.error(error, "ERROR"),
+	});
 
-	// React.useEffect(() => {
-	// 	complete("Your predefined prompt here");
-	// }, []);
-	
+	React.useEffect(() => {
+		complete("");
+	}, []);
 
 	return (
 		<>
@@ -26,13 +25,10 @@ export default function Page() {
 				<AnimationSplashscreen setShowAnimation={setShowAnimation} />
 			) : (
 				<View className="flex-1 p-4">
-					<Link href="/frigo" className="mb-6">
-						<Text>Retrouver mon frigo</Text>
-					</Link>
 					<ScrollView className="flex-1">
-						{/* <Text>{completion}</Text> */}
+						<Text>{completion}</Text>
 					</ScrollView>
-					{true && <Loader fadeIn="bottom" />}
+					{isLoading && <Loader fadeIn="bottom" />}
 				</View>
 			)}
 		</>
