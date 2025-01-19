@@ -26,6 +26,10 @@ export default async function handler(request: Request) {
 
 	const { prompt } = await request.json() as { prompt: string };
 
+	if (!prompt) {
+		return new Response("KO", { status: 400 });
+	}
+
 	const result = generateRecipe(prompt.split(','), 4);
 
 	// for await (const textPart of result.textStream) {
