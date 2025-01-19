@@ -25,6 +25,11 @@ module.exports = () => ({
 			output: "static",
 			favicon: "./assets/images/favicon.png",
 		},
+		extra: {
+			eas: {
+				projectId: "3acc2dc4-e7d8-4ffd-b4ad-d2419686fe2f"
+			}
+		},
 		plugins: [
 			[
 				"expo-router",
