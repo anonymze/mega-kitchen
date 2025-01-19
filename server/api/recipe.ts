@@ -24,12 +24,9 @@ export default async function handler(request: Request) {
 	console.log(ip);
 	console.log(process.env.OPENAI_API_KEY);
 
-	const data = await request.json();
+	const { prompt } = await request.json() as { prompt: string };
 
-	console.log(data);
-	console.log('iciii');
-
-	const result = generateRecipe(["tomate", "oignon", "pâte", "artichaud"], 4);
+	const result = generateRecipe(prompt.split(','), 4);
 
 	// for await (const textPart of result.textStream) {
 	// 	console.log(textPart);
