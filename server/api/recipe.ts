@@ -24,7 +24,11 @@ export default async function handler(request: Request) {
 	console.log(ip);
 	console.log(process.env.OPENAI_API_KEY);
 
-	const result = generateRecipe(["tomate", "oignon", "pâte", "artichaud"], 8);
+	const data = await request.json();
+
+	console.log(data)
+
+	const result = generateRecipe(["tomate", "oignon", "pâte", "artichaud"], 4);
 
 	// for await (const textPart of result.textStream) {
 	// 	console.log(textPart);
