@@ -18,7 +18,7 @@ export default async function handler(request: Request) {
 	const ip = ipAddress(request);
 
 	request.headers.forEach((value, key) => {
-		console.log(key, value);
+		// console.log(key, value);
 	});
 	console.log(VERCEL_REGION);
 	console.log(ip);
@@ -26,7 +26,8 @@ export default async function handler(request: Request) {
 
 	const data = await request.json();
 
-	console.log(data)
+	console.log(data);
+	console.log('iciii');
 
 	const result = generateRecipe(["tomate", "oignon", "pâte", "artichaud"], 4);
 
