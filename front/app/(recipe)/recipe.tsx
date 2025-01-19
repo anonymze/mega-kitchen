@@ -1,13 +1,14 @@
 import AnimationSplashscreen from "@/components/animation-splashscreen";
 import { View, ScrollView, Text } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 import { fetch as expoFetch } from "expo/fetch";
 import { useCompletion } from "@ai-sdk/react";
 import Loader from "@/components/ui/loader";
-import { Link } from "expo-router";
 import React from "react";
 
 
 export default function Page() {
+	const { prompt } = useLocalSearchParams();
 	const [showAnimation, setShowAnimation] = React.useState(true);
 	const { complete, completion, isLoading } = useCompletion({
 		fetch: expoFetch as unknown as typeof globalThis.fetch,
@@ -16,7 +17,7 @@ export default function Page() {
 	});
 
 	React.useEffect(() => {
-		complete("");
+		complete(prompt.toString());
 	}, []);
 
 	return (

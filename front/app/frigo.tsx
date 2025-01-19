@@ -4,8 +4,8 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { Heading } from "@/components/ui/heading";
 import { Button, Text, View } from "react-native";
 import vegetables from "@/utils/data/vegetables";
-import { Link, router } from "expo-router";
 import fruits from "@/utils/data/fruits";
+import { router } from "expo-router";
 import { Image } from "expo-image";
 import React from "react";
 
@@ -65,7 +65,12 @@ export default function Page() {
 								color="red"
 								title="Chercher une recette"
 								onPress={() => {
-									router.push("/(recipe)/recipe");
+									router.push({
+										pathname: "/(recipe)/recipe",
+										params: {
+											prompt: selectedValues.map((value) => value.label.FR).join(','),
+										}
+									});
 								}}
 							/>
 						) : (
