@@ -4,8 +4,8 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { Heading } from "@/components/ui/heading";
 import { Button, Text, View } from "react-native";
 import vegetables from "@/utils/data/vegetables";
+import { router, Stack } from "expo-router";
 import fruits from "@/utils/data/fruits";
-import { router } from "expo-router";
 import { Image } from "expo-image";
 import React from "react";
 

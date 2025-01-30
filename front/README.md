@@ -5,6 +5,7 @@ The most complete application about cooking food.
 ## Commands
 
 <!-- can solve some problems with the project dependencies -->
+npx expo start -c
 pnpm start --reset-cache
 pnpm dlx expo prebuild
 

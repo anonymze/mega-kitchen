@@ -1,21 +1,53 @@
+import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset, } from "react-native-reanimated";
+import { AnimatedScrollView } from "react-native-reanimated/lib/typescript/component/ScrollView";
 import fruitsAndVegetables from "@/utils/data/fruits_vegetables_months";
 import { ScrollView } from "react-native-gesture-handler";
+import { Link, router, Stack } from "expo-router";
 import { Heading } from "@/components/ui/heading";
+import { Button, Text, View } from "react-native";
 import { MONTHS } from "@/utils/data/months";
-import { Button, View } from "react-native";
-import { Link, router } from "expo-router";
 import Card from "@/components/ui/card";
 import { P } from "@/components/ui/p";
+import React from "react";
 
 
 export default function Page() {
+	const animatedRef = useAnimatedRef<any>();
+	const scroll = useScrollViewOffset(animatedRef);
+	const style = useAnimatedStyle(() => ({
+		transform: [{ translateY: interpolate(scroll.value, [0, 100], [50, 0], "clamp") }],
+	}));
+
 	const currentMonthString = MONTHS[new Date().getMonth()];
 
 	const fruitList = fruitsAndVegetables[currentMonthString].fruits;
 	const vegetableList = fruitsAndVegetables[currentMonthString].vegetables;
 
 	return (
-		<ScrollView className="flex-1 p-4" bounces={true} showsVerticalScrollIndicator={false}>
+		<Animated.ScrollView
+			ref={animatedRef}
+			className="flex-1 p-4"
+			bounces={true}
+			showsVerticalScrollIndicator={false}
+		>
+			<Stack.Screen
+				options={{
+					headerTitle: (props) => {
+						console.log(props);
+						return (
+							<View
+								style={{
+									overflow: "hidden",
+									paddingBottom: 9,
+									marginBottom: -9,
+								}}
+							>
+								<Text>Mega Kitchen</Text>
+							</View>
+						);
+					},
+				}}
+			/>
 			<Heading level={2} className="pb-5">
 				Fruits & légumes de saison :
 			</Heading>
@@ -76,6 +108,6 @@ export default function Page() {
 					router.push("/frigo");
 				}}
 			/>
-		</ScrollView>
+		</Animated.ScrollView>
 	);
 }
