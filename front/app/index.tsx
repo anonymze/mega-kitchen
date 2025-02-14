@@ -1,10 +1,12 @@
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset, } from "react-native-reanimated";
 import { AnimatedScrollView } from "react-native-reanimated/lib/typescript/component/ScrollView";
 import fruitsAndVegetables from "@/utils/data/fruits_vegetables_months";
+import { ButtonGradient } from "@/components/ui/button-gradient";
+import { Button, Pressable, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 import { Link, router, Stack } from "expo-router";
 import { Heading } from "@/components/ui/heading";
-import { Button, Text, View } from "react-native";
 import { MONTHS } from "@/utils/data/months";
 import Card from "@/components/ui/card";
 import { P } from "@/components/ui/p";
@@ -101,6 +103,14 @@ export default function Page() {
 					);
 				})}
 			</View>
+
+			<ButtonGradient
+				onPress={() => {
+					router.push("/frigo");
+				}}
+			>
+				Continuer
+			</ButtonGradient>
 
 			<Button
 				title="FRIGO - Voir les fruits et légumes de l'année"
