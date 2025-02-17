@@ -21,6 +21,7 @@ export default function Card({ source }: Props) {
 				}}
 				source={source}
 				contentFit="contain"
+				
 			/>
 		</View>
 	);
